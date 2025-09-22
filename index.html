@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Yasin Ullah, Pakistan">
+    <meta name="description" content="حنفی طہارت ٹریکر مسلم خواتین کو حنفی (دیوبند) فقہ کے اصولوں کے مطابق حیض، استحاضہ، اور طہارت کے دنوں کو درست طریقے سے ٹریک اور شمار کرنے میں مدد کرتا ہے۔ یہ مقامی ڈیٹا سٹوریج کے لیے انڈیکسڈ ڈی بی کا استعمال کرتا ہے۔">
+    <meta name="keywords" content="حنفی، فقہ، طہارت ٹریکر، حیض، استحاضہ، طہارت، مسلم خواتین، انڈیکسڈ ڈی بی، دیوبند">
+    <title>حنفی طہارت ٹریکر</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        .modal {
+            display: none;
+        }
+        .modal.open {
+            display: flex;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans text-gray-900 min-h-screen flex flex-col">
+    <header class="bg-gradient-to-r from-green-600 to-green-800 text-white p-4 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-3xl font-bold" id="appTitle">حنفی طہارت ٹریکر</h1>
+            <nav class="flex items-center space-x-4">
+                <button id="langToggleBtn" class="bg-white text-green-700 px-3 py-1 rounded-full text-sm hover:bg-green-100 transition duration-300 ease-in-out">English</button>
+                <button id="historyBtn" class="bg-white text-green-700 px-4 py-2 rounded-full hover:bg-green-100 transition duration-300 ease-in-out" id="historyButtonText">سائیکل ہسٹری</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow container mx-auto p-4 md:p-8">
+        <section id="dashboard" class="bg-white p-6 rounded-lg shadow-xl mb-8">
+            <h2 class="text-2xl font-semibold mb-4 text-green-700" id="dashboardTitle">ڈیش بورڈ</h2>
+            <div id="statusDisplay" class="mb-6 p-4 bg-green-50 text-green-800 border-r-4 border-green-500 rounded-md text-lg">
+                <p id="loadingStatus">حیثیت لوڈ ہو رہی ہے...</p>
+            </div>
+            <div id="habitDisplay" class="mb-6 p-4 bg-blue-50 text-blue-800 border-r-4 border-blue-500 rounded-md text-lg">
+                <p id="habitStatus">آپ کی عادت (عادہ): ابھی سیٹ نہیں ہوئی ہے۔</p>
+            </div>
+            <button id="mainActionButton" class="w-full bg-green-600 text-white py-3 rounded-lg text-xl font-bold hover:bg-green-700 transition duration-300 ease-in-out" disabled>
+                لوڈ ہو رہا ہے...
+            </button>
+        </section>
+
+        <section id="cycleHistorySection" class="bg-white p-6 rounded-lg shadow-xl mb-8 hidden">
+            <h2 class="text-2xl font-semibold mb-4 text-green-700" id="cycleHistoryTitle">سائیکل ہسٹری</h2>
+            <div id="historyList" class="space-y-4">
+                <p class="text-gray-600" id="noHistory">ابھی تک کوئی سائیکل ہسٹری دستیاب نہیں ہے۔</p>
+            </div>
+            <button id="backToDashboardBtn" class="mt-6 bg-gray-300 text-gray-800 px-6 py-2 rounded-lg hover:bg-gray-400 transition duration-300 ease-in-out" id="backToDashboardButtonText">ڈیش بورڈ پر واپس</button>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white p-4 text-center text-sm mt-auto">
+        <div class="container mx-auto">
+            <p id="copyrightText">&copy; 2023 حنفی طہارت ٹریکر۔ تمام حقوق محفوظ ہیں۔</p>
+            <p class="mt-2 text-gray-400" id="disclaimerText">
+                یہ ایپلیکیشن ایک مفید ٹول کے طور پر ہے اور حنفی فقہ کے اصولوں پر مبنی ہے۔ یہ کسی مستند اسلامی اسکالر (مفتی) کی رہنمائی کا متبادل نہیں ہے۔ کسی بھی طبی مسئلے کے لیے، براہ کرم صحت کی دیکھ بھال کرنے والے ماہر سے مشورہ کریں۔
+            </p>
+            <div class="mt-2">
+                <button id="exportDataBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition duration-300 mr-2" id="exportDataButtonText">ڈیٹا ایکسپورٹ کریں</button>
+                <input type="file" id="importDataInput" accept=".json" class="hidden">
+                <button id="importDataBtn" class="bg-yellow-600 hover:bg-yellow-700 text-white px-4 py-2 rounded-md transition duration-300" id="importDataButtonText">ڈیٹا امپورٹ کریں</button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+
+    <!-- Welcome Modal -->
+    <div id="welcomeModal" class="modal fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 z-50">
+        <div class="bg-white p-8 rounded-lg shadow-2xl max-w-md w-full text-center">
+            <h3 class="text-2xl font-bold mb-6 text-green-700" id="welcomeModalTitle">حنفی طہارت ٹریکر میں خوش آمدید!</h3>
+            <p class="mb-6 text-lg" id="welcomeQuestion">کیا آپ نے پہلے کبھی صحیح حیض کا تجربہ کیا ہے؟</p>
+            <div class="flex flex-col space-y-4">
+                <button id="mubtadiahBtn" class="bg-green-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition duration-300">نہیں، یہ میرا پہلا موقع ہے۔</button>
+                <button id="mutadahBtn" class="bg-blue-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-blue-700 transition duration-300">ہاں، میری عادت ہے۔</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mutadah Habit Input Modal -->
+    <div id="mutadahHabitModal" class="modal fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 z-50">
+        <div class="bg-white p-8 rounded-lg shadow-2xl max-w-md w-full">
+            <h3 class="text-2xl font-bold mb-6 text-green-700" id="habitModalTitle">اپنی عادات درج کریں</h3>
+            <div class="mb-4">
+                <label for="haidhAdahDays" class="block text-gray-700 text-sm font-bold mb-2" id="haidhAdahLabel">آخری صحیح حیض کی مدت (دن):</label>
+                <input type="number" id="haidhAdahDays" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-right" min="3" max="10" required>
+            </div>
+            <div class="mb-6">
+                <label for="tuhrAdahDays" class="block text-gray-700 text-sm font-bold mb-2" id="tuhrAdahLabel">آخری صحیح طہارت کی مدت (دن):</label>
+                <input type="number" id="tuhrAdahDays" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-right" min="15" required>
+            </div>
+            <button id="saveMutadahHabitBtn" class="w-full bg-green-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition duration-300" id="saveHabitButtonText">عادات محفوظ کریں</button>
+        </div>
+    </div>
+
+    <!-- Date/Time Picker Modal -->
+    <div id="dateTimeModal" class="modal fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 z-50">
+        <div class="bg-white p-8 rounded-lg shadow-2xl max-w-md w-full">
+            <h3 id="dateTimeModalTitle" class="text-2xl font-bold mb-6 text-green-700">تاریخ اور وقت منتخب کریں</h3>
+            <div class="mb-4">
+                <label for="datePicker" class="block text-gray-700 text-sm font-bold mb-2" id="dateLabel">تاریخ:</label>
+                <input type="date" id="datePicker" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-right" required>
+            </div>
+            <div class="mb-6">
+                <label for="timePicker" class="block text-gray-700 text-sm font-bold mb-2" id="timeLabel">وقت:</label>
+                <input type="time" id="timePicker" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-right" required>
+            </div>
+            <button id="saveDateTimeBtn" class="w-full bg-green-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition duration-300" id="saveButtonText">محفوظ کریں</button>
+            <button id="cancelDateTimeBtn" class="w-full mt-3 bg-gray-300 text-gray-800 py-3 rounded-lg text-lg font-semibold hover:bg-gray-400 transition duration-300" id="cancelButtonText">منسوخ کریں</button>
+        </div>
+    </div>
+
+    <script>
+        // Language Data
+        const translations = {
+            ur: {
+                dir: 'rtl',
+                appTitle: 'حنفی طہارت ٹریکر',
+                historyButtonText: 'سائیکل ہسٹری',
+                dashboardTitle: 'ڈیش بورڈ',
+                loadingStatus: 'حیثیت لوڈ ہو رہی ہے...',
+                habitStatus: 'آپ کی عادت (عادہ): ابھی سیٹ نہیں ہوئی۔',
+                mainActionButtonLoading: 'لوڈ ہو رہا ہے...',
+                welcomeModalTitle: 'حنفی طہارت ٹریکر میں خوش آمدید!',
+                welcomeQuestion: 'کیا آپ نے پہلے کبھی صحیح حیض کا تجربہ کیا ہے؟',
+                mubtadiahBtn: 'نہیں، یہ میرا پہلا موقع ہے۔',
+                mutadahBtn: 'ہاں، میری عادت ہے۔',
+                habitModalTitle: 'اپنی عادات درج کریں',
+                haidhAdahLabel: 'آخری صحیح حیض کی مدت (دن):',
+                tuhrAdahLabel: 'آخری صحیح طہارت کی مدت (دن):',
+                saveHabitButtonText: 'عادات محفوظ کریں',
+                dateTimeModalTitleStart: 'خون آنے کا وقت منتخب کریں',
+                dateTimeModalTitleEnd: 'خون بند ہونے کا وقت منتخب کریں',
+                dateLabel: 'تاریخ:',
+                timeLabel: 'وقت:',
+                saveButtonText: 'محفوظ کریں',
+                cancelButtonText: 'منسوخ کریں',
+                currentStatusTuhr: 'موجودہ حیثیت: طہارت (پاکیزگی)۔ آپ نماز اور روزے کی مکلف ہیں۔',
+                currentStatusBleeding: (startTime) => `موجودہ حیثیت: خون آنا ${startTime} کو شروع ہوا ہے۔ جب یہ رکے تو اختتامی وقت درج کریں۔`,
+                currentStatusUnclear: 'حیثیت غیر واضح ہے۔ براہ کرم اپنے خون آنے کے واقعات درج کریں۔',
+                logBleedingStart: 'خون آنے کا وقت درج کریں',
+                logBleedingEnd: 'خون بند ہونے کا وقت درج کریں',
+                startSetup: 'سیٹ اپ شروع کریں',
+                yourHabit: (haidhDays, tuhrDays) => `آپ کی عادت (عادہ): ${haidhDays} دن حیض، ${tuhrDays} دن طہارت۔`,
+                noHabitEstablished: 'آپ کی عادت (عادہ): ابھی قائم نہیں ہوئی۔',
+                cycleHistoryTitle: 'سائیکل ہسٹری',
+                noHistory: 'ابھی تک کوئی سائیکل ہسٹری دستیاب نہیں ہے۔',
+                backToDashboardButtonText: 'ڈیش بورڈ پر واپس',
+                haidhCycleType: 'حیض (ماہواری)',
+                istihadahCycleType: 'استحاضہ (غیر ماہواری خون)',
+                cycleStart: 'شروع:',
+                cycleEnd: 'اختتام:',
+                totalDuration: (days, hours) => `کل مدت: ${days} دن (${hours} گھنٹے)`,
+                noteHaidhLimited: (haidhDays) => `نوٹ: حیض کی مدت عادت کے مطابق ${haidhDays} دن تک محدود تھی۔ باقی استحاضہ تھا۔`,
+                purityBefore: (days) => `اس سے پہلے کی طہارت: ${days} دن`,
+                copyrightText: '&copy; 2023 حنفی طہارت ٹریکر۔ تمام حقوق محفوظ ہیں۔',
+                disclaimerText: 'یہ ایپلیکیشن ایک مفید ٹول کے طور پر ہے اور حنفی فقہ کے اصولوں پر مبنی ہے۔ یہ کسی مستند اسلامی اسکالر (مفتی) کی رہنمائی کا متبادل نہیں ہے۔ کسی بھی طبی مسئلے کے لیے، براہ کرم صحت کی دیکھ بھال کرنے والے ماہر سے مشورہ کریں۔',
+                exportDataButtonText: 'ڈیٹا ایکسپورٹ کریں',
+                importDataButtonText: 'ڈیٹا امپورٹ کریں',
+                alertHaidhDurationInvalid: 'براہ کرم حیض کی ایک درست مدت (3 اور 10 دن کے درمیان) درج کریں۔',
+                alertTuhrDurationInvalid: 'براہ کرم طہارت کی ایک درست مدت (کم از کم 15 دن) درج کریں۔',
+                alertSelectDateTime: 'براہ کرم تاریخ اور وقت دونوں منتخب کریں۔',
+                alertBleedingBeforeLastHaidhEnd: 'خون پچھلے حیض کے اختتام سے پہلے شروع نہیں ہو سکتا۔',
+                alertBleedingStartLogged: 'خون آنے کا وقت کامیابی سے درج کر لیا گیا!',
+                alertBleedingStartNotLogged: 'خون آنے کا وقت درج نہیں ہوا۔ براہ کرم پہلے آغاز درج کریں۔',
+                alertBleedingEndBeforeStart: 'خون بند ہونے کا وقت شروع ہونے کے وقت سے پہلے نہیں ہو سکتا۔',
+                alertCycleCalculated: 'خون بند ہونے کا وقت درج کر لیا گیا اور سائیکل کا حساب لگا لیا گیا!',
+                alertExportSuccess: 'ڈیٹا کامیابی سے ایکسپورٹ ہو گیا!',
+                alertNoDataToExport: 'ایکسپورٹ کرنے کے لیے کوئی ڈیٹا نہیں ہے۔',
+                alertExportError: 'ڈیٹا ایکسپورٹ کرنے میں خرابی۔',
+                alertImportSuccess: 'ڈیٹا کامیابی سے امپورٹ ہو گیا! ایپ اب دوبارہ لوڈ ہو گی تاکہ تبدیلیوں کا اطلاق ہو سکے۔',
+                alertInvalidImportFile: 'غلط ڈیٹا فائل۔ براہ کرم یقینی بنائیں کہ یہ ایک درست حنفی طہارت ٹریکر بیک اپ JSON ہے۔',
+                alertImportError: 'ڈیٹا امپورٹ کرنے میں خرابی۔ غلط JSON فارمیٹ۔',
+            },
+            en: {
+                dir: 'ltr',
+                appTitle: 'Hanafi Purity Tracker',
+                historyButtonText: 'Cycle History',
+                dashboardTitle: 'Dashboard',
+                loadingStatus: 'Loading status...',
+                habitStatus: 'Your Habit (Adah): Not set yet.',
+                mainActionButtonLoading: 'Loading...',
+                welcomeModalTitle: 'Welcome to Hanafi Purity Tracker!',
+                welcomeQuestion: 'Have you experienced a valid menstrual period before?',
+                mubtadiahBtn: 'No, this is my first time.',
+                mutadahBtn: 'Yes, I have a habit.',
+                habitModalTitle: 'Enter Your Habits',
+                haidhAdahLabel: 'Last valid Haidh duration (days):',
+                tuhrAdahLabel: 'Last valid Tuhr duration (days):',
+                saveHabitButtonText: 'Save Habits',
+                dateTimeModalTitleStart: 'Select Bleeding Start Date and Time',
+                dateTimeModalTitleEnd: 'Select Bleeding End Date and Time',
+                dateLabel: 'Date:',
+                timeLabel: 'Time:',
+                saveButtonText: 'Save',
+                cancelButtonText: 'Cancel',
+                currentStatusTuhr: 'Current Status: Purity (Tuhr). You are obligated to pray and fast.',
+                currentStatusBleeding: (startTime) => `Current Status: Bleeding started on ${startTime}. Log the end time when it stops.`,
+                currentStatusUnclear: 'Status unclear. Please log your bleeding events.',
+                logBleedingStart: 'Log Bleeding Start',
+                logBleedingEnd: 'Log Bleeding End',
+                startSetup: 'Start Setup',
+                yourHabit: (haidhDays, tuhrDays) => `Your Habit (Adah): ${haidhDays} days of Haidh, ${tuhrDays} days of Tuhr.`,
+                noHabitEstablished: 'Your Habit (Adah): Not yet established.',
+                cycleHistoryTitle: 'Cycle History',
+                noHistory: 'No cycle history available yet.',
+                backToDashboardButtonText: 'Back to Dashboard',
+                haidhCycleType: 'Menstruation (Haidh)',
+                istihadahCycleType: 'Non-menstrual (Istihadah)',
+                cycleStart: 'Start:',
+                cycleEnd: 'End:',
+                totalDuration: (days, hours) => `Total Duration: ${days} days (${hours} hours)`,
+                noteHaidhLimited: (haidhDays) => `Note: Haidh duration was limited to habit of ${haidhDays} days. Remaining was Istihadah.`,
+                purityBefore: (days) => `Purity before: ${days} days`,
+                copyrightText: '&copy; 2023 Hanafi Purity Tracker. All rights reserved.',
+                disclaimerText: 'This application is intended as a helpful tool and is based on the principles of the Hanafi school of Fiqh. It is not a substitute for guidance from a qualified Islamic scholar (Mufti). For any medical issues, please consult a healthcare professional.',
+                exportDataButtonText: 'Export Data',
+                importDataButtonText: 'Import Data',
+                alertHaidhDurationInvalid: 'Please enter a valid Haidh duration between 3 and 10 days.',
+                alertTuhrDurationInvalid: 'Please enter a valid Tuhr duration (minimum 15 days).',
+                alertSelectDateTime: 'Please select both date and time.',
+                alertBleedingBeforeLastHaidhEnd: 'Bleeding cannot start before the end of the last Haidh period.',
+                alertBleedingStartLogged: 'Bleeding start logged successfully!',
+                alertBleedingStartNotLogged: 'Bleeding start time not logged. Please log start first.',
+                alertBleedingEndBeforeStart: 'Bleeding end time cannot be before start time.',
+                alertCycleCalculated: 'Bleeding end logged and cycle calculated!',
+                alertExportSuccess: 'Data exported successfully!',
+                alertNoDataToExport: 'No data to export.',
+                alertExportError: 'Error exporting data.',
+                alertImportSuccess: 'Data imported successfully! App will now reload.',
+                alertInvalidImportFile: 'Invalid data file. Please ensure it is a valid Hanafi Purity Tracker backup JSON.',
+                alertImportError: 'Error importing data. Invalid JSON format.',
+            }
+        };
+
+        let currentLang = 'ur';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            document.documentElement.dir = translations[lang].dir;
+
+            // Update all elements with dynamic IDs or specific class/attribute for text
+            document.getElementById('appTitle').textContent = translations[lang].appTitle;
+            document.getElementById('historyBtn').textContent = translations[lang].historyButtonText;
+            document.getElementById('dashboardTitle').textContent = translations[lang].dashboardTitle;
+            document.getElementById('loadingStatus').textContent = translations[lang].loadingStatus;
+            document.getElementById('habitStatus').textContent = translations[lang].habitStatus;
+            document.getElementById('mainActionButton').textContent = translations[lang].mainActionButtonLoading;
+            document.getElementById('welcomeModalTitle').textContent = translations[lang].welcomeModalTitle;
+            document.getElementById('welcomeQuestion').textContent = translations[lang].welcomeQuestion;
+            document.getElementById('mubtadiahBtn').textContent = translations[lang].mubtadiahBtn;
+            document.getElementById('mutadahBtn').textContent = translations[lang].mutadahBtn;
+            document.getElementById('habitModalTitle').textContent = translations[lang].habitModalTitle;
+            document.getElementById('haidhAdahLabel').textContent = translations[lang].haidhAdahLabel;
+            document.getElementById('tuhrAdahLabel').textContent = translations[lang].tuhrAdahLabel;
+            document.getElementById('saveHabitButtonText').textContent = translations[lang].saveHabitButtonText;
+            document.getElementById('dateTimeModalTitle').textContent = translations[lang].dateTimeModalTitleStart; // This changes dynamically
+            document.getElementById('dateLabel').textContent = translations[lang].dateLabel;
+            document.getElementById('timeLabel').textContent = translations[lang].timeLabel;
+            document.getElementById('saveButtonText').textContent = translations[lang].saveButtonText;
+            document.getElementById('cancelButtonText').textContent = translations[lang].cancelButtonText;
+            document.getElementById('cycleHistoryTitle').textContent = translations[lang].cycleHistoryTitle;
+            document.getElementById('noHistory').textContent = translations[lang].noHistory;
+            document.getElementById('backToDashboardButtonText').textContent = translations[lang].backToDashboardButtonText;
+            document.getElementById('copyrightText').textContent = translations[lang].copyrightText;
+            document.getElementById('disclaimerText').textContent = translations[lang].disclaimerText;
+            document.getElementById('exportDataButtonText').textContent = translations[lang].exportDataButtonText;
+            document.getElementById('importDataButtonText').textContent = translations[lang].importDataButtonText;
+            
+            // Update the language toggle button text
+            document.getElementById('langToggleBtn').textContent = (lang === 'ur' ? 'English' : 'اردو');
+            
+            updateDashboardUI(); // Refresh dashboard to apply language changes to dynamic text
+            renderCycleHistory(); // Refresh history to apply language changes
+        }
+
+        // IndexedDB Constants
+        const DB_NAME = 'HanafiPurityDB';
+        const STORE_NAME = 'userProfile';
+        const DB_VERSION = 1;
+
+        // Fiqh Constants (in hours)
+        const HAIDH_MIN = 72; // 3 days
+        const HAIDH_MAX = 240; // 10 days
+        const TUHR_MIN = 360; // 15 days
+
+        // Global user profile object
+        let userProfile = {
+            id: 1,
+            userType: null, // 'mubtadiah' (beginner) or 'mutadah' (habitual)
+            haidhAdahHours: 0, // Habit for Haidh in hours
+            tuhrAdahHours: 0,  // Habit for Tuhr in hours
+            currentState: 'tuhr', // 'tuhr', 'bleeding', 'haidh', or 'istihadah'
+            lastHaidhEnd: null, // Timestamp of the end of the last valid Haidh
+            currentBleedingStart: null, // Timestamp for the current bleeding episode
+            cycleHistory: [] // An array of all past cycle objects
+        };
+
+        // DOM Elements
+        const langToggleBtn = document.getElementById('langToggleBtn');
+        const welcomeModal = document.getElementById('welcomeModal');
+        const mubtadiahBtn = document.getElementById('mubtadiahBtn');
+        const mutadahBtn = document.getElementById('mutadahBtn');
+        const mutadahHabitModal = document.getElementById('mutadahHabitModal');
+        const haidhAdahDaysInput = document.getElementById('haidhAdahDays');
+        const tuhrAdahDaysInput = document.getElementById('tuhrAdahDays');
+        const saveMutadahHabitBtn = document.getElementById('saveMutadahHabitBtn');
+        const statusDisplay = document.getElementById('statusDisplay');
+        const habitDisplay = document.getElementById('habitDisplay');
+        const mainActionButton = document.getElementById('mainActionButton');
+        const dateTimeModal = document.getElementById('dateTimeModal');
+        const dateTimeModalTitle = document.getElementById('dateTimeModalTitle');
+        const datePicker = document.getElementById('datePicker');
+        const timePicker = document.getElementById('timePicker');
+        const saveDateTimeBtn = document.getElementById('saveDateTimeBtn');
+        const cancelDateTimeBtn = document.getElementById('cancelDateTimeBtn');
+        const historyBtn = document.getElementById('historyBtn');
+        const cycleHistorySection = document.getElementById('cycleHistorySection');
+        const historyList = document.getElementById('historyList');
+        const backToDashboardBtn = document.getElementById('backToDashboardBtn');
+        const exportDataBtn = document.getElementById('exportDataBtn');
+        const importDataInput = document.getElementById('importDataInput');
+        const importDataBtn = document.getElementById('importDataBtn');
+
+        // IndexedDB Functions
+        function openDB() {
+            return new Promise((resolve, reject) => {
+                const request = indexedDB.open(DB_NAME, DB_VERSION);
+
+                request.onupgradeneeded = (event) => {
+                    const db = event.target.result;
+                    if (!db.objectStoreNames.contains(STORE_NAME)) {
+                        db.createObjectStore(STORE_NAME, { keyPath: 'id' });
+                    }
+                };
+
+                request.onsuccess = (event) => {
+                    resolve(event.target.result);
+                };
+
+                request.onerror = (event) => {
+                    console.error("IndexedDB error:", event.target.errorCode);
+                    reject(event.target.errorCode);
+                };
+            });
+        }
+
+        async function getProfile() {
+            const db = await openDB();
+            return new Promise((resolve, reject) => {
+                const transaction = db.transaction([STORE_NAME], 'readonly');
+                const store = transaction.objectStore(STORE_NAME);
+                const request = store.get(1);
+
+                request.onsuccess = (event) => {
+                    resolve(event.target.result);
+                };
+
+                request.onerror = (event) => {
+                    console.error("Error getting profile:", event.target.errorCode);
+                    reject(event.target.errorCode);
+                };
+            });
+        }
+
+        async function saveProfile(profile) {
+            const db = await openDB();
+            return new Promise((resolve, reject) => {
+                const transaction = db.transaction([STORE_NAME], 'readwrite');
+                const store = transaction.objectStore(STORE_NAME);
+                const request = store.put(profile);
+
+                request.onsuccess = () => {
+                    resolve();
+                };
+
+                request.onerror = (event) => {
+                    console.error("Error saving profile:", event.target.errorCode);
+                    reject(event.target.errorCode);
+                };
+            });
+        }
+
+        // Utility Functions
+        function hoursToDays(hours) {
+            return (hours / 24).toFixed(1);
+        }
+
+        function daysToHours(days) {
+            return days * 24;
+        }
+
+        function formatDateTime(timestamp) {
+            if (!timestamp) return 'N/A';
+            const date = new Date(timestamp);
+            return date.toLocaleString(currentLang === 'ur' ? 'ur-PK' : 'en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true
+            });
+        }
+
+        function calculateDurationInHours(start, end) {
+            if (!start || !end) return 0;
+            return Math.abs(new Date(end).getTime() - new Date(start).getTime()) / (1000 * 60 * 60);
+        }
+
+        // Core Logic
+        async function initializeApp() {
+            setLanguage(currentLang); // Set initial language
+            const savedProfile = await getProfile();
+
+            if (savedProfile) {
+                userProfile = savedProfile;
+                updateDashboardUI();
+            } else {
+                // Add sample data on first run if no profile exists
+                await addSampleData();
+                const freshProfile = await getProfile(); // Re-fetch after adding samples
+                if (freshProfile) {
+                    userProfile = freshProfile;
+                    updateDashboardUI();
+                } else {
+                    welcomeModal.classList.add('open');
+                }
+            }
+            mainActionButton.disabled = false; // Enable button after initialization attempt
+        }
+
+        async function setupMubtadiah() {
+            userProfile.userType = 'mubtadiah';
+            await saveProfile(userProfile);
+            welcomeModal.classList.remove('open');
+            updateDashboardUI();
+        }
+
+        async function setupMutadah() {
+            welcomeModal.classList.remove('open');
+            mutadahHabitModal.classList.add('open');
+        }
+
+        async function saveMutadahHabit() {
+            const haidhDays = parseFloat(haidhAdahDaysInput.value);
+            const tuhrDays = parseFloat(tuhrAdahDaysInput.value);
+
+            if (isNaN(haidhDays) || haidhDays < 3 || haidhDays > 10) {
+                alert(translations[currentLang].alertHaidhDurationInvalid);
+                return;
+            }
+            if (isNaN(tuhrDays) || tuhrDays < 15) {
+                alert(translations[currentLang].alertTuhrDurationInvalid);
+                return;
+            }
+
+            userProfile.userType = 'mutadah';
+            userProfile.haidhAdahHours = daysToHours(haidhDays);
+            userProfile.tuhrAdahHours = daysToHours(tuhrDays);
+            await saveProfile(userProfile);
+            mutadahHabitModal.classList.remove('open');
+            updateDashboardUI();
+        }
+
+        async function logBleedingStart() {
+            dateTimeModalTitle.textContent = translations[currentLang].dateTimeModalTitleStart;
+            datePicker.valueAsDate = new Date();
+            timePicker.value = new Date().toTimeString().slice(0, 5);
+            dateTimeModal.dataset.action = 'start';
+            dateTimeModal.classList.add('open');
+            // Set direction for date/time pickers
+            datePicker.style.direction = translations[currentLang].dir;
+            timePicker.style.direction = translations[currentLang].dir;
+        }
+
+        async function logBleedingEnd() {
+            dateTimeModalTitle.textContent = translations[currentLang].dateTimeModalTitleEnd;
+            datePicker.valueAsDate = new Date();
+            timePicker.value = new Date().toTimeString().slice(0, 5);
+            dateTimeModal.dataset.action = 'end';
+            dateTimeModal.classList.add('open');
+            // Set direction for date/time pickers
+            datePicker.style.direction = translations[currentLang].dir;
+            timePicker.style.direction = translations[currentLang].dir;
+        }
+
+        async function handleDateTimeSave() {
+            const selectedDate = datePicker.value;
+            const selectedTime = timePicker.value;
+
+            if (!selectedDate || !selectedTime) {
+                alert(translations[currentLang].alertSelectDateTime);
+                return;
+            }
+
+            const timestamp = new Date(`${selectedDate}T${selectedTime}`).getTime();
+
+            if (dateTimeModal.dataset.action === 'start') {
+                if (userProfile.lastHaidhEnd && timestamp < userProfile.lastHaidhEnd) {
+                    alert(translations[currentLang].alertBleedingBeforeLastHaidhEnd);
+                    return;
+                }
+                userProfile.currentBleedingStart = timestamp;
+                userProfile.currentState = 'bleeding';
+                await saveProfile(userProfile);
+                alert(translations[currentLang].alertBleedingStartLogged);
+            } else if (dateTimeModal.dataset.action === 'end') {
+                if (!userProfile.currentBleedingStart) {
+                    alert(translations[currentLang].alertBleedingStartNotLogged);
+                    return;
+                }
+                if (timestamp < userProfile.currentBleedingStart) {
+                    alert(translations[currentLang].alertBleedingEndBeforeStart);
+                    return;
+                }
+
+                await calculateCycle(timestamp);
+                alert(translations[currentLang].alertCycleCalculated);
+            }
+
+            dateTimeModal.classList.remove('open');
+            updateDashboardUI();
+        }
+
+        async function calculateCycle(bleedingEndTimestamp) {
+            const bleedingStart = userProfile.currentBleedingStart;
+            const totalBleedingDuration = calculateDurationInHours(bleedingStart, bleedingEndTimestamp);
+            let cycleType = 'istihadah';
+            let effectiveHaidhHours = 0;
+            let tuhrDurationSinceLastHaidh = userProfile.lastHaidhEnd ? calculateDurationInHours(userProfile.lastHaidhEnd, bleedingStart) : 0; // 0 if no last Haidh end
+
+            // Rule 1: Bleeding less than 3 days (HAIDH_MIN) is Istihadah
+            if (totalBleedingDuration < HAIDH_MIN) {
+                cycleType = 'istihadah';
+            }
+            // Rule 2: Bleeding starts before minimum purity (TUHR_MIN)
+            else if (tuhrDurationSinceLastHaidh < TUHR_MIN && userProfile.lastHaidhEnd !== null) {
+                cycleType = 'istihadah';
+            }
+            // Rule 3: Bleeding between 3 and 10 days (HAIDH_MIN to HAIDH_MAX)
+            else if (totalBleedingDuration >= HAIDH_MIN && totalBleedingDuration <= HAIDH_MAX) {
+                cycleType = 'haidh';
+                effectiveHaidhHours = totalBleedingDuration;
+                userProfile.lastHaidhEnd = bleedingEndTimestamp;
+
+                // Update Haidh Adah
+                userProfile.haidhAdahHours = effectiveHaidhHours;
+
+                // Update Tuhr Adah from the purity period leading up to this Haidh
+                if (tuhrDurationSinceLastHaidh >= TUHR_MIN) { // Only update if it was a valid tuhr
+                     userProfile.tuhrAdahHours = tuhrDurationSinceLastHaidh;
+                } else if (userProfile.userType === 'mubtadiah' && userProfile.tuhrAdahHours === 0) {
+                    // For mubtadiah's first valid Haidh, set initial tuhr adah to 15 days if not already set.
+                    userProfile.tuhrAdahHours = TUHR_MIN;
+                }
+            }
+            // Rule 4: Bleeding exceeds 10 days (HAIDH_MAX)
+            else if (totalBleedingDuration > HAIDH_MAX) {
+                if (userProfile.userType === 'mutadah' && userProfile.haidhAdahHours > 0) {
+                    // Mutadah with an established habit: Haidh is up to her habit, rest is Istihadah
+                    effectiveHaidhHours = userProfile.haidhAdahHours;
+                    cycleType = 'haidh'; // The initial part is haidh
+                    userProfile.lastHaidhEnd = bleedingStart + (effectiveHaidhHours * 60 * 60 * 1000);
+                } else {
+                    // Mubtadiah or mutadah without established haidh habit: All is Istihadah.
+                    // This is a strict interpretation for >10 days without prior habit.
+                    // Another view could be 10 days Haidh, rest Istihadah if no adah.
+                    // Following the explicit "beyond 240 hours -> Istihadah" for these cases.
+                    cycleType = 'istihadah';
+                    effectiveHaidhHours = 0; // No valid haidh in this case
+                }
+            }
+
+            // If it's the first ever recorded bleeding for a mubtadiah and it's classified as haidh,
+            // this establishes her initial adah for both haidh and tuhr (default to 15 days).
+            if (userProfile.userType === 'mubtadiah' && userProfile.haidhAdahHours === 0 && cycleType === 'haidh') {
+                userProfile.haidhAdahHours = effectiveHaidhHours;
+                userProfile.tuhrAdahHours = TUHR_MIN; // Default minimal tuhr habit
+            }
+
+
+            userProfile.cycleHistory.unshift({ // Add to the beginning of the array
+                startDate: bleedingStart,
+                endDate: bleedingEndTimestamp,
+                durationHours: totalBleedingDuration,
+                type: cycleType,
+                effectiveHaidhHours: effectiveHaidhHours,
+                tuhrDurationBefore: tuhrDurationSinceLastHaidh
+            });
+
+            // Update currentState and reset currentBleedingStart
+            userProfile.currentState = 'tuhr';
+            userProfile.currentBleedingStart = null;
+            await saveProfile(userProfile);
+        }
+
+        function updateDashboardUI() {
+            let statusMessage = translations[currentLang].loadingStatus;
+            let statusClass = "bg-gray-50 text-gray-800 border-gray-500"; // Default neutral
+            let buttonText = translations[currentLang].mainActionButtonLoading;
+            let buttonClass = "bg-gray-400 cursor-not-allowed"; // Default disabled
+
+            if (!userProfile.userType) {
+                statusMessage = translations[currentLang].loadingStatus; // Should be replaced by setup process
+                buttonText = translations[currentLang].startSetup;
+                mainActionButton.onclick = () => welcomeModal.classList.add('open');
+                mainActionButton.disabled = false;
+            } else {
+                switch (userProfile.currentState) {
+                    case 'tuhr':
+                        statusMessage = translations[currentLang].currentStatusTuhr;
+                        statusClass = "bg-green-50 text-green-800 border-r-4 border-green-500";
+                        buttonText = translations[currentLang].logBleedingStart;
+                        buttonClass = "bg-green-600 hover:bg-green-700";
+                        mainActionButton.onclick = logBleedingStart;
+                        mainActionButton.disabled = false;
+                        break;
+                    case 'bleeding':
+                        const startTime = formatDateTime(userProfile.currentBleedingStart);
+                        statusMessage = translations[currentLang].currentStatusBleeding(startTime);
+                        statusClass = "bg-yellow-50 text-yellow-800 border-r-4 border-yellow-500";
+                        buttonText = translations[currentLang].logBleedingEnd;
+                        buttonClass = "bg-red-600 hover:bg-red-700";
+                        mainActionButton.onclick = logBleedingEnd;
+                        mainActionButton.disabled = false;
+                        break;
+                    default:
+                        statusMessage = translations[currentLang].currentStatusUnclear;
+                        statusClass = "bg-gray-50 text-gray-800 border-r-4 border-gray-500";
+                        buttonText = translations[currentLang].logBleedingStart;
+                        buttonClass = "bg-green-600 hover:bg-green-700";
+                        mainActionButton.onclick = logBleedingStart;
+                        mainActionButton.disabled = false;
+                        break;
+                }
+            }
+
+            statusDisplay.innerHTML = `<p>${statusMessage}</p>`;
+            statusDisplay.className = `mb-6 p-4 rounded-md text-lg ${statusClass}`;
+            mainActionButton.textContent = buttonText;
+            mainActionButton.className = `w-full text-white py-3 rounded-lg text-xl font-bold transition duration-300 ease-in-out ${buttonClass}`;
+
+            // Update habit display
+            if (userProfile.userType === 'mutadah' || (userProfile.userType === 'mubtadiah' && userProfile.haidhAdahHours > 0)) {
+                habitDisplay.innerHTML = `<p>${translations[currentLang].yourHabit(hoursToDays(userProfile.haidhAdahHours), hoursToDays(userProfile.tuhrAdahHours))}</p>`;
+            } else {
+                habitDisplay.innerHTML = `<p>${translations[currentLang].noHabitEstablished}</p>`;
+            }
+        }
+
+        function renderCycleHistory() {
+            historyList.innerHTML = ''; // Clear previous entries
+            if (userProfile.cycleHistory.length === 0) {
+                historyList.innerHTML = `<p class="text-gray-600">${translations[currentLang].noHistory}</p>`;
+                return;
+            }
+
+            userProfile.cycleHistory.forEach((cycle, index) => {
+                const cycleDiv = document.createElement('div');
+                cycleDiv.className = `p-4 rounded-lg shadow-md ${cycle.type === 'haidh' ? 'bg-red-50 border-r-4 border-red-500' : 'bg-blue-50 border-r-4 border-blue-500'}`;
+                cycleDiv.innerHTML = `
+                    <p class="text-lg font-semibold mb-1">${cycle.type === 'haidh' ? translations[currentLang].haidhCycleType : translations[currentLang].istihadahCycleType}</p>
+                    <p><strong>${translations[currentLang].cycleStart}</strong> ${formatDateTime(cycle.startDate)}</p>
+                    <p><strong>${translations[currentLang].cycleEnd}</strong> ${formatDateTime(cycle.endDate)}</p>
+                    <p><strong>${translations[currentLang].totalDuration(hoursToDays(cycle.durationHours), cycle.durationHours.toFixed(1))}</strong></p>
+                    ${cycle.type === 'haidh' && cycle.effectiveHaidhHours < cycle.durationHours ? `<p class="text-red-700"><strong>${translations[currentLang].noteHaidhLimited(hoursToDays(cycle.effectiveHaidhHours))}</strong></p>` : ''}
+                    ${cycle.tuhrDurationBefore !== undefined ? `<p><strong>${translations[currentLang].purityBefore(hoursToDays(cycle.tuhrDurationBefore))}</strong></p>` : ''}
+                `;
+                historyList.appendChild(cycleDiv);
+            });
+        }
+
+        function showHistoryPage() {
+            document.getElementById('dashboard').classList.add('hidden');
+            cycleHistorySection.classList.remove('hidden');
+            renderCycleHistory();
+        }
+
+        function showDashboardPage() {
+            document.getElementById('dashboard').classList.remove('hidden');
+            cycleHistorySection.classList.add('hidden');
+            updateDashboardUI(); // Refresh dashboard in case history was viewed
+        }
+
+        // Event Listeners
+        langToggleBtn.addEventListener('click', () => {
+            setLanguage(currentLang === 'ur' ? 'en' : 'ur');
+        });
+        mubtadiahBtn.addEventListener('click', setupMubtadiah);
+        mutadahBtn.addEventListener('click', setupMutadah);
+        saveMutadahHabitBtn.addEventListener('click', saveMutadahHabit);
+        saveDateTimeBtn.addEventListener('click', handleDateTimeSave);
+        cancelDateTimeBtn.addEventListener('click', () => dateTimeModal.classList.remove('open'));
+        historyBtn.addEventListener('click', showHistoryPage);
+        backToDashboardBtn.addEventListener('click', showDashboardPage);
+
+        // Data Backup & Restore
+        async function exportData() {
+            const db = await openDB();
+            const transaction = db.transaction([STORE_NAME], 'readonly');
+            const store = transaction.objectStore(STORE_NAME);
+            const request = store.get(1);
+
+            request.onsuccess = () => {
+                const data = request.result;
+                if (data) {
+                    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `hanafi_purity_tracker_backup_${new Date().toISOString().slice(0, 10)}.json`;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                    alert(translations[currentLang].alertExportSuccess);
+                } else {
+                    alert(translations[currentLang].alertNoDataToExport);
+                }
+            };
+
+            request.onerror = (event) => {
+                console.error('Error exporting data:', event.target.errorCode);
+                alert(translations[currentLang].alertExportError);
+            };
+        }
+
+        async function importData(event) {
+            const file = event.target.files[0];
+            if (!file) {
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = async (e) => {
+                try {
+                    const importedProfile = JSON.parse(e.target.result);
+                    // Basic validation to ensure it's a valid profile object
+                    if (importedProfile && importedProfile.id === 1 && Array.isArray(importedProfile.cycleHistory)) {
+                        await saveProfile(importedProfile);
+                        userProfile = importedProfile; // Update global profile
+                        alert(translations[currentLang].alertImportSuccess);
+                        window.location.reload(); // Reload to reflect new data
+                    } else {
+                        alert(translations[currentLang].alertInvalidImportFile);
+                    }
+                } catch (error) {
+                    console.error('Error parsing imported data:', error);
+                    alert(translations[currentLang].alertImportError);
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        exportDataBtn.addEventListener('click', exportData);
+        importDataBtn.addEventListener('click', () => importDataInput.click());
+        importDataInput.addEventListener('change', importData);
+
+        // Sample Data for initial population
+        async function addSampleData() {
+            const existingProfile = await getProfile();
+            if (existingProfile && existingProfile.userType) {
+                // If a profile already exists, do not add sample data
+                return;
+            }
+
+            userProfile = {
+                id: 1,
+                userType: 'mutadah',
+                haidhAdahHours: daysToHours(7), // Initial habit for sample
+                tuhrAdahHours: daysToHours(20), // Initial habit for sample
+                currentState: 'tuhr',
+                lastHaidhEnd: null,
+                currentBleedingStart: null,
+                cycleHistory: []
+            };
+
+            const now = Date.now();
+
+            // Sample 1: Valid Haidh (7 days) after good tuhr (20 days)
+            let haidh1End = now - daysToHours(10) * (1000 * 60 * 60); // Ended 10 days ago
+            let haidh1Start = haidh1End - daysToHours(7) * (1000 * 60 * 60); // Lasted 7 days
+            let tuhrBefore1 = daysToHours(20); // 20 days purity before
+
+            userProfile.cycleHistory.unshift({
+                startDate: haidh1Start,
+                endDate: haidh1End,
+                durationHours: daysToHours(7),
+                type: 'haidh',
+                effectiveHaidhHours: daysToHours(7),
+                tuhrDurationBefore: tuhrBefore1
+            });
+            userProfile.lastHaidhEnd = haidh1End;
+            userProfile.haidhAdahHours = daysToHours(7);
+            userProfile.tuhrAdahHours = tuhrBefore1;
+
+            // Sample 2: Istihadah (too short - 2 days) after min tuhr (15 days)
+            let istihadah2Start = haidh1End + daysToHours(15) * (1000 * 60 * 60);
+            let istihadah2End = istihadah2Start + daysToHours(2) * (1000 * 60 * 60);
+
+            userProfile.cycleHistory.unshift({
+                startDate: istihadah2Start,
+                endDate: istihadah2End,
+                durationHours: daysToHours(2),
+                type: 'istihadah',
+                effectiveHaidhHours: 0,
+                tuhrDurationBefore: daysToHours(15)
+            });
+            // lastHaidhEnd remains haidh1End as this was istihadah
+
+            // Sample 3: Haidh exceeding 10 days (12 days), habit of 7 days applied
+            let bleeding3Start = userProfile.lastHaidhEnd + daysToHours(25) * (1000 * 60 * 60); // 25 days purity
+            let bleeding3End = bleeding3Start + daysToHours(12) * (1000 * 60 * 60); // Bleeds for 12 days
+
+            userProfile.cycleHistory.unshift({
+                startDate: bleeding3Start,
+                endDate: bleeding3End,
+                durationHours: daysToHours(12),
+                type: 'haidh',
+                effectiveHaidhHours: daysToHours(7), // Habit of 7 days applied
+                tuhrDurationBefore: daysToHours(25)
+            });
+            userProfile.lastHaidhEnd = bleeding3Start + daysToHours(7) * (1000 * 60 * 60); // Haidh effectively ends at habit mark
+            userProfile.haidhAdahHours = daysToHours(7); // Adah doesn't change from this
+            userProfile.tuhrAdahHours = daysToHours(25); // Tuhr adah updated from the 25 days purity
+
+            // Sample 4: Istihadah (bleeding starts within min tuhr)
+            let bleeding4Start = userProfile.lastHaidhEnd + daysToHours(10) * (1000 * 60 * 60); // Only 10 days purity after last Haidh
+            let bleeding4End = bleeding4Start + daysToHours(5) * (1000 * 60 * 60); // Bleeds for 5 days
+
+            userProfile.cycleHistory.unshift({
+                startDate: bleeding4Start,
+                endDate: bleeding4End,
+                durationHours: daysToHours(5),
+                type: 'istihadah',
+                effectiveHaidhHours: 0,
+                tuhrDurationBefore: daysToHours(10) // Less than TUHR_MIN, so istihadah
+            });
+            // lastHaidhEnd remains unchanged.
+
+            await saveProfile(userProfile);
+        }
+
+        // Initialize the app when the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', initializeApp);
+
+    </script>
+</body>
+</html>
