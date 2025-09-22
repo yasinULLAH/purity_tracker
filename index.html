@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="ur" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Yasin Ullah, Pakistan">
-    <meta name="description" content="حنفی طہارت ٹریکر مسلم خواتین کو حنفی (دیوبند) فقہ کے اصولوں کے مطابق حیض، استحاضہ، اور طہارت کے دنوں کو درست طریقے سے ٹریک اور شمار کرنے میں مدد کرتا ہے۔ یہ مقامی ڈیٹا سٹوریج کے لیے انڈیکسڈ ڈی بی کا استعمال کرتا ہے۔">
+    <meta name="description"
+        content="حنفی طہارت ٹریکر مسلم خواتین کو حنفی (دیوبند) فقہ کے اصولوں کے مطابق حیض، استحاضہ، اور طہارت کے دنوں کو درست طریقے سے ٹریک اور شمار کرنے میں مدد کرتا ہے۔ یہ مقامی ڈیٹا سٹوریج کے لیے انڈیکسڈ ڈی بی کا استعمال کرتا ہے۔">
     <meta name="keywords" content="حنفی، فقہ، طہارت ٹریکر، حیض، استحاضہ، طہارت، مسلم خواتین، انڈیکسڈ ڈی بی، دیوبند">
     <title>حنفی طہارت ٹریکر</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
@@ -13,13 +15,16 @@
         ::-webkit-scrollbar {
             width: 8px;
         }
+
         ::-webkit-scrollbar-track {
             background: #f1f1f1;
         }
+
         ::-webkit-scrollbar-thumb {
             background: #888;
             border-radius: 4px;
         }
+
         ::-webkit-scrollbar-thumb:hover {
             background: #555;
         }
@@ -27,18 +32,23 @@
         .modal {
             display: none;
         }
+
         .modal.open {
             display: flex;
         }
     </style>
 </head>
+
 <body class="bg-gray-100 font-sans text-gray-900 min-h-screen flex flex-col">
     <header class="bg-gradient-to-r from-green-600 to-green-800 text-white p-4 shadow-md">
         <div class="container mx-auto flex justify-between items-center">
             <h1 class="text-3xl font-bold" id="appTitle">حنفی طہارت ٹریکر</h1>
             <nav class="flex items-center space-x-4">
-                <button id="langToggleBtn" class="bg-white text-green-700 px-3 py-1 rounded-full text-sm hover:bg-green-100 transition duration-300 ease-in-out">English</button>
-                <button id="historyBtn" class="bg-white text-green-700 px-4 py-2 rounded-full hover:bg-green-100 transition duration-300 ease-in-out" id="historyButtonText">سائیکل ہسٹری</button>
+                <button id="langToggleBtn"
+                    class="bg-white text-green-700 px-3 py-1 rounded-full text-sm hover:bg-green-100 transition duration-300 ease-in-out">English</button>
+                <button id="historyBtn"
+                    class="bg-white text-green-700 px-4 py-2 rounded-full hover:bg-green-100 transition duration-300 ease-in-out"
+                    id="historyButtonText">سائیکل ہسٹری</button>
             </nav>
         </div>
     </header>
@@ -46,13 +56,17 @@
     <main class="flex-grow container mx-auto p-4 md:p-8">
         <section id="dashboard" class="bg-white p-6 rounded-lg shadow-xl mb-8">
             <h2 class="text-2xl font-semibold mb-4 text-green-700" id="dashboardTitle">ڈیش بورڈ</h2>
-            <div id="statusDisplay" class="mb-6 p-4 bg-green-50 text-green-800 border-r-4 border-green-500 rounded-md text-lg">
+            <div id="statusDisplay"
+                class="mb-6 p-4 bg-green-50 text-green-800 border-r-4 border-green-500 rounded-md text-lg">
                 <p id="loadingStatus">حیثیت لوڈ ہو رہی ہے...</p>
             </div>
-            <div id="habitDisplay" class="mb-6 p-4 bg-blue-50 text-blue-800 border-r-4 border-blue-500 rounded-md text-lg">
+            <div id="habitDisplay"
+                class="mb-6 p-4 bg-blue-50 text-blue-800 border-r-4 border-blue-500 rounded-md text-lg">
                 <p id="habitStatus">آپ کی عادت (عادہ): ابھی سیٹ نہیں ہوئی ہے۔</p>
             </div>
-            <button id="mainActionButton" class="w-full bg-green-600 text-white py-3 rounded-lg text-xl font-bold hover:bg-green-700 transition duration-300 ease-in-out" disabled>
+            <button id="mainActionButton"
+                class="w-full bg-green-600 text-white py-3 rounded-lg text-xl font-bold hover:bg-green-700 transition duration-300 ease-in-out"
+                disabled>
                 لوڈ ہو رہا ہے...
             </button>
         </section>
@@ -62,7 +76,9 @@
             <div id="historyList" class="space-y-4">
                 <p class="text-gray-600" id="noHistory">ابھی تک کوئی سائیکل ہسٹری دستیاب نہیں ہے۔</p>
             </div>
-            <button id="backToDashboardBtn" class="mt-6 bg-gray-300 text-gray-800 px-6 py-2 rounded-lg hover:bg-gray-400 transition duration-300 ease-in-out" id="backToDashboardButtonText">ڈیش بورڈ پر واپس</button>
+            <button id="backToDashboardBtn"
+                class="mt-6 bg-gray-300 text-gray-800 px-6 py-2 rounded-lg hover:bg-gray-400 transition duration-300 ease-in-out"
+                id="backToDashboardButtonText">ڈیش بورڈ پر واپس</button>
         </section>
     </main>
 
@@ -70,12 +86,18 @@
         <div class="container mx-auto">
             <p id="copyrightText">&copy; 2023 حنفی طہارت ٹریکر۔ تمام حقوق محفوظ ہیں۔</p>
             <p class="mt-2 text-gray-400" id="disclaimerText">
-                یہ ایپلیکیشن ایک مفید ٹول کے طور پر ہے اور حنفی فقہ کے اصولوں پر مبنی ہے۔ یہ کسی مستند اسلامی اسکالر (مفتی) کی رہنمائی کا متبادل نہیں ہے۔ کسی بھی طبی مسئلے کے لیے، براہ کرم صحت کی دیکھ بھال کرنے والے ماہر سے مشورہ کریں۔
+                یہ ایپلیکیشن ایک مفید ٹول کے طور پر ہے اور حنفی فقہ کے اصولوں پر مبنی ہے۔ یہ کسی مستند اسلامی اسکالر
+                (مفتی) کی رہنمائی کا متبادل نہیں ہے۔ کسی بھی طبی مسئلے کے لیے، براہ کرم صحت کی دیکھ بھال کرنے والے ماہر
+                سے مشورہ کریں۔
             </p>
             <div class="mt-2">
-                <button id="exportDataBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition duration-300 mr-2" id="exportDataButtonText">ڈیٹا ایکسپورٹ کریں</button>
+                <button id="exportDataBtn"
+                    class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition duration-300 mr-2"
+                    id="exportDataButtonText">ڈیٹا ایکسپورٹ کریں</button>
                 <input type="file" id="importDataInput" accept=".json" class="hidden">
-                <button id="importDataBtn" class="bg-yellow-600 hover:bg-yellow-700 text-white px-4 py-2 rounded-md transition duration-300" id="importDataButtonText">ڈیٹا امپورٹ کریں</button>
+                <button id="importDataBtn"
+                    class="bg-yellow-600 hover:bg-yellow-700 text-white px-4 py-2 rounded-md transition duration-300"
+                    id="importDataButtonText">ڈیٹا امپورٹ کریں</button>
             </div>
         </div>
     </footer>
@@ -83,47 +105,71 @@
     <!-- Modals -->
 
     <!-- Welcome Modal -->
-    <div id="welcomeModal" class="modal fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 z-50">
+    <div id="welcomeModal"
+        class="modal fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 z-50">
         <div class="bg-white p-8 rounded-lg shadow-2xl max-w-md w-full text-center">
-            <h3 class="text-2xl font-bold mb-6 text-green-700" id="welcomeModalTitle">حنفی طہارت ٹریکر میں خوش آمدید!</h3>
+            <h3 class="text-2xl font-bold mb-6 text-green-700" id="welcomeModalTitle">حنفی طہارت ٹریکر میں خوش آمدید!
+            </h3>
             <p class="mb-6 text-lg" id="welcomeQuestion">کیا آپ نے پہلے کبھی صحیح حیض کا تجربہ کیا ہے؟</p>
             <div class="flex flex-col space-y-4">
-                <button id="mubtadiahBtn" class="bg-green-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition duration-300">نہیں، یہ میرا پہلا موقع ہے۔</button>
-                <button id="mutadahBtn" class="bg-blue-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-blue-700 transition duration-300">ہاں، میری عادت ہے۔</button>
+                <button id="mubtadiahBtn"
+                    class="bg-green-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition duration-300">نہیں،
+                    یہ میرا پہلا موقع ہے۔</button>
+                <button id="mutadahBtn"
+                    class="bg-blue-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-blue-700 transition duration-300">ہاں،
+                    میری عادت ہے۔</button>
             </div>
         </div>
     </div>
 
     <!-- Mutadah Habit Input Modal -->
-    <div id="mutadahHabitModal" class="modal fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 z-50">
+    <div id="mutadahHabitModal"
+        class="modal fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 z-50">
         <div class="bg-white p-8 rounded-lg shadow-2xl max-w-md w-full">
             <h3 class="text-2xl font-bold mb-6 text-green-700" id="habitModalTitle">اپنی عادات درج کریں</h3>
             <div class="mb-4">
-                <label for="haidhAdahDays" class="block text-gray-700 text-sm font-bold mb-2" id="haidhAdahLabel">آخری صحیح حیض کی مدت (دن):</label>
-                <input type="number" id="haidhAdahDays" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-right" min="3" max="10" required>
+                <label for="haidhAdahDays" class="block text-gray-700 text-sm font-bold mb-2" id="haidhAdahLabel">آخری
+                    صحیح حیض کی مدت (دن):</label>
+                <input type="number" id="haidhAdahDays"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-right"
+                    min="3" max="10" required>
             </div>
             <div class="mb-6">
-                <label for="tuhrAdahDays" class="block text-gray-700 text-sm font-bold mb-2" id="tuhrAdahLabel">آخری صحیح طہارت کی مدت (دن):</label>
-                <input type="number" id="tuhrAdahDays" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-right" min="15" required>
+                <label for="tuhrAdahDays" class="block text-gray-700 text-sm font-bold mb-2" id="tuhrAdahLabel">آخری
+                    صحیح طہارت کی مدت (دن):</label>
+                <input type="number" id="tuhrAdahDays"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-right"
+                    min="15" required>
             </div>
-            <button id="saveMutadahHabitBtn" class="w-full bg-green-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition duration-300" id="saveHabitButtonText">عادات محفوظ کریں</button>
+            <button id="saveMutadahHabitBtn"
+                class="w-full bg-green-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition duration-300"
+                id="saveHabitButtonText">عادات محفوظ کریں</button>
         </div>
     </div>
 
     <!-- Date/Time Picker Modal -->
-    <div id="dateTimeModal" class="modal fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 z-50">
+    <div id="dateTimeModal"
+        class="modal fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 z-50">
         <div class="bg-white p-8 rounded-lg shadow-2xl max-w-md w-full">
             <h3 id="dateTimeModalTitle" class="text-2xl font-bold mb-6 text-green-700">تاریخ اور وقت منتخب کریں</h3>
             <div class="mb-4">
                 <label for="datePicker" class="block text-gray-700 text-sm font-bold mb-2" id="dateLabel">تاریخ:</label>
-                <input type="date" id="datePicker" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-right" required>
+                <input type="date" id="datePicker"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-right"
+                    required>
             </div>
             <div class="mb-6">
                 <label for="timePicker" class="block text-gray-700 text-sm font-bold mb-2" id="timeLabel">وقت:</label>
-                <input type="time" id="timePicker" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-right" required>
+                <input type="time" id="timePicker"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-right"
+                    required>
             </div>
-            <button id="saveDateTimeBtn" class="w-full bg-green-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition duration-300" id="saveButtonText">محفوظ کریں</button>
-            <button id="cancelDateTimeBtn" class="w-full mt-3 bg-gray-300 text-gray-800 py-3 rounded-lg text-lg font-semibold hover:bg-gray-400 transition duration-300" id="cancelButtonText">منسوخ کریں</button>
+            <button id="saveDateTimeBtn"
+                class="w-full bg-green-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition duration-300"
+                id="saveButtonText">محفوظ کریں</button>
+            <button id="cancelDateTimeBtn"
+                class="w-full mt-3 bg-gray-300 text-gray-800 py-3 rounded-lg text-lg font-semibold hover:bg-gray-400 transition duration-300"
+                id="cancelButtonText">منسوخ کریں</button>
         </div>
     </div>
 
@@ -284,10 +330,10 @@
             document.getElementById('disclaimerText').textContent = translations[lang].disclaimerText;
             document.getElementById('exportDataButtonText').textContent = translations[lang].exportDataButtonText;
             document.getElementById('importDataButtonText').textContent = translations[lang].importDataButtonText;
-            
+
             // Update the language toggle button text
             document.getElementById('langToggleBtn').textContent = (lang === 'ur' ? 'English' : 'اردو');
-            
+
             updateDashboardUI(); // Refresh dashboard to apply language changes to dynamic text
             renderCycleHistory(); // Refresh history to apply language changes
         }
@@ -568,7 +614,7 @@
 
                 // Update Tuhr Adah from the purity period leading up to this Haidh
                 if (tuhrDurationSinceLastHaidh >= TUHR_MIN) { // Only update if it was a valid tuhr
-                     userProfile.tuhrAdahHours = tuhrDurationSinceLastHaidh;
+                    userProfile.tuhrAdahHours = tuhrDurationSinceLastHaidh;
                 } else if (userProfile.userType === 'mubtadiah' && userProfile.tuhrAdahHours === 0) {
                     // For mubtadiah's first valid Haidh, set initial tuhr adah to 15 days if not already set.
                     userProfile.tuhrAdahHours = TUHR_MIN;
@@ -866,4 +912,5 @@
 
     </script>
 </body>
+
 </html>
