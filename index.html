@@ -1,17 +1,15 @@
 <!DOCTYPE html>
-<html lang="ur" dir="rtl">
 
+<html dir="rtl" lang="ur">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Yasin Ullah, Pakistan">
-    <meta name="description"
-        content="حنفی طہارت ٹریکر مسلم خواتین کو حنفی (دیوبند) فقہ کے اصولوں کے مطابق حیض، استحاضہ، نفاس، اور طہارت کے دنوں کو درست طریقے سے ٹریک اور شمار کرنے میں مدد کرتا ہے۔ یہ مقامی ڈیٹا سٹوریج کے لیے انڈیکسڈ ڈی بی کا استعمال کرتا ہے۔ اس میں سائیکل کا کیلنڈر، نوٹس، اور اہم فقہی رہنمائی شامل ہے۔">
-    <meta name="keywords"
-        content="حنفی، فقہ، طہارت ٹریکر، حیض، استحاضہ، نفاس، طہارت، مسلم خواتین، انڈیکسڈ ڈی بی، دیوبند، اسلامی طہارت، نفاس ٹریکر، عادت، ایدہ، ٹریکر، ماہواری کیلنڈر، نماز قضا، روزہ قضا، قدریہ، سفرہ، سن الیاس">
-    <title>حنفی طہارت ٹریکر - اسلامی خواتین کی طہارت اور نفاس ٹریکنگ</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Yasin Ullah, Pakistan" name="author"/>
+<meta content="حنفی طہارت ٹریکر مسلم خواتین کو حنفی (دیوبند) فقہ کے اصولوں کے مطابق حیض، استحاضہ، نفاس، اور طہارت کے دنوں کو درست طریقے سے ٹریک اور شمار کرنے میں مدد کرتا ہے۔ یہ مقامی ڈیٹا سٹوریج کے لیے انڈیکسڈ ڈی بی کا استعمال کرتا ہے۔ اس میں سائیکل کا کیلنڈر، نوٹس، اور اہم فقہی رہنمائی شامل ہے۔" name="description"/>
+<meta content="حنفی، فقہ، طہارت ٹریکر، حیض، استحاضہ، نفاس، طہارت، مسلم خواتین، انڈیکسڈ ڈی بی، دیوبند، اسلامی طہارت، نفاس ٹریکر، عادت، ایدہ، ٹریکر، ماہواری کیلنڈر، نماز قضا، روزہ قضا، قدریہ، سفرہ، سن الیاس" name="keywords"/>
+<title>حنفی طہارت ٹریکر - اسلامی خواتین کی طہارت اور نفاس ٹریکنگ</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<style>
         /* Custom scrollbar for better aesthetics */
         ::-webkit-scrollbar {
             width: 8px;
@@ -150,294 +148,219 @@
             text-align: right;
         }
     </style>
-</head>
-
+<link href="manifest.json" rel="manifest"/><link href="favicon.ico" rel="icon" type="image/x-icon"/></head>
 <body class="bg-gray-100 font-sans text-gray-900 min-h-screen flex flex-col">
-    <header class="bg-gradient-to-r from-green-600 to-green-800 text-white p-4 shadow-md">
-        <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-3xl font-bold" id="appTitle">حنفی طہارت ٹریکر</h1>
-            <nav class="flex items-center space-x-4">
-                <button id="langToggleBtn"
-                    class="bg-white text-green-700 px-3 py-1 rounded-full text-sm hover:bg-green-100 transition duration-300 ease-in-out">English</button>
-                <button id="historyBtn"
-                    class="bg-white text-green-700 px-4 py-2 rounded-full hover:bg-green-100 transition duration-300 ease-in-out">سائیکل
+<header class="bg-gradient-to-r from-green-600 to-green-800 text-white p-4 shadow-md">
+<div class="container mx-auto flex justify-between items-center">
+<h1 class="text-3xl font-bold" id="appTitle">حنفی طہارت ٹریکر</h1>
+<nav class="flex items-center space-x-4">
+<button class="bg-white text-green-700 px-3 py-1 rounded-full text-sm hover:bg-green-100 transition duration-300 ease-in-out" id="langToggleBtn">English</button>
+<button class="bg-white text-green-700 px-4 py-2 rounded-full hover:bg-green-100 transition duration-300 ease-in-out" id="historyBtn">سائیکل
                     ہسٹری</button>
-                <button id="calendarBtn"
-                    class="bg-white text-green-700 px-4 py-2 rounded-full hover:bg-green-100 transition duration-300 ease-in-out">کیلنڈر</button>
-            </nav>
-        </div>
-    </header>
-
-    <main class="flex-grow container mx-auto p-4 md:p-8">
-        <section id="dashboard" class="bg-white p-6 rounded-lg shadow-xl mb-8">
-            <h2 class="text-2xl font-semibold mb-4 text-green-700 flex items-center" id="dashboardTitle">
+<button class="bg-white text-green-700 px-4 py-2 rounded-full hover:bg-green-100 transition duration-300 ease-in-out" id="calendarBtn">کیلنڈر</button>
+</nav>
+</div>
+</header>
+<main class="flex-grow container mx-auto p-4 md:p-8">
+<section class="bg-white p-6 rounded-lg shadow-xl mb-8" id="dashboard">
+<h2 class="text-2xl font-semibold mb-4 text-green-700 flex items-center" id="dashboardTitle">
                 ڈیش بورڈ
                 <span class="info-box mr-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 hover:text-gray-700"
-                        viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                            clip-rule="evenodd" />
-                    </svg>
-                    <span class="info-box-content" id="dashboardInfo"></span>
-                </span>
-            </h2>
-            <div id="statusDisplay"
-                class="mb-6 p-4 bg-green-50 text-green-800 border-r-4 border-green-500 rounded-md text-lg">
-                <p id="loadingStatus">حیثیت لوڈ ہو رہی ہے...</p>
-            </div>
-            <div id="habitDisplay"
-                class="mb-6 p-4 bg-blue-50 text-blue-800 border-r-4 border-blue-500 rounded-md text-lg flex items-center">
-                <p id="habitStatus">آپ کی عادت (عادہ): ابھی سیٹ نہیں ہوئی۔</p>
-                <span class="info-box mr-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 hover:text-gray-700"
-                        viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                            clip-rule="evenodd" />
-                    </svg>
-                    <span class="info-box-content" id="habitInfo"></span>
-                </span>
-            </div>
-            <button id="mainActionButton"
-                class="w-full bg-green-600 text-white py-3 rounded-lg text-xl font-bold hover:bg-green-700 transition duration-300 ease-in-out"
-                disabled>
+<svg class="h-5 w-5 text-gray-500 hover:text-gray-700" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" fill-rule="evenodd"></path>
+</svg>
+<span class="info-box-content" id="dashboardInfo"></span>
+</span>
+</h2>
+<div class="mb-6 p-4 bg-green-50 text-green-800 border-r-4 border-green-500 rounded-md text-lg" id="statusDisplay">
+<p id="loadingStatus">حیثیت لوڈ ہو رہی ہے...</p>
+</div>
+<div class="mb-6 p-4 bg-blue-50 text-blue-800 border-r-4 border-blue-500 rounded-md text-lg flex items-center" id="habitDisplay">
+<p id="habitStatus">آپ کی عادت (عادہ): ابھی سیٹ نہیں ہوئی۔</p>
+<span class="info-box mr-2">
+<svg class="h-5 w-5 text-gray-500 hover:text-gray-700" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" fill-rule="evenodd"></path>
+</svg>
+<span class="info-box-content" id="habitInfo"></span>
+</span>
+</div>
+<button class="w-full bg-green-600 text-white py-3 rounded-lg text-xl font-bold hover:bg-green-700 transition duration-300 ease-in-out" disabled="" id="mainActionButton">
                 لوڈ ہو رہا ہے...
             </button>
-            <button id="logNifasBtn"
-                class="w-full mt-3 bg-purple-600 text-white py-3 rounded-lg text-xl font-bold hover:bg-purple-700 transition duration-300 ease-in-out hidden">نفاس
+<button class="w-full mt-3 bg-purple-600 text-white py-3 rounded-lg text-xl font-bold hover:bg-purple-700 transition duration-300 ease-in-out hidden" id="logNifasBtn">نفاس
                 لاگ کریں</button>
-        </section>
-
-        <section id="cycleHistorySection" class="bg-white p-6 rounded-lg shadow-xl mb-8 hidden">
-            <h2 class="text-2xl font-semibold mb-4 text-green-700" id="cycleHistoryTitle">سائیکل ہسٹری</h2>
-            <div id="historyList" class="space-y-4">
-                <p class="text-gray-600" id="noHistory">ابھی تک کوئی سائیکل ہسٹری دستیاب نہیں ہے۔</p>
-            </div>
-            <button id="backToDashboardBtn"
-                class="mt-6 bg-gray-300 text-gray-800 px-6 py-2 rounded-lg hover:bg-gray-400 transition duration-300 ease-in-out">ڈیش
+</section>
+<section class="bg-white p-6 rounded-lg shadow-xl mb-8 hidden" id="cycleHistorySection">
+<h2 class="text-2xl font-semibold mb-4 text-green-700" id="cycleHistoryTitle">سائیکل ہسٹری</h2>
+<div class="space-y-4" id="historyList">
+<p class="text-gray-600" id="noHistory">ابھی تک کوئی سائیکل ہسٹری دستیاب نہیں ہے۔</p>
+</div>
+<button class="mt-6 bg-gray-300 text-gray-800 px-6 py-2 rounded-lg hover:bg-gray-400 transition duration-300 ease-in-out" id="backToDashboardBtn">ڈیش
                 بورڈ پر واپس</button>
-        </section>
-
-        <section id="calendarSection" class="bg-white p-6 rounded-lg shadow-xl mb-8 hidden">
-            <h2 class="text-2xl font-semibold mb-4 text-green-700 flex items-center" id="calendarTitle">
+</section>
+<section class="bg-white p-6 rounded-lg shadow-xl mb-8 hidden" id="calendarSection">
+<h2 class="text-2xl font-semibold mb-4 text-green-700 flex items-center" id="calendarTitle">
                 سائیکل کیلنڈر
                 <span class="info-box mr-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 hover:text-gray-700"
-                        viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                            clip-rule="evenodd" />
-                    </svg>
-                    <span class="info-box-content" id="calendarInfo"></span>
-                </span>
-            </h2>
-            <div class="flex justify-between items-center mb-4">
-                <button id="prevMonthBtn"
-                    class="bg-gray-200 text-gray-700 px-3 py-1 rounded-md hover:bg-gray-300">&lt;</button>
-                <h3 id="currentMonthYear" class="text-xl font-semibold"></h3>
-                <button id="nextMonthBtn"
-                    class="bg-gray-200 text-gray-700 px-3 py-1 rounded-md hover:bg-gray-300">&gt;</button>
-            </div>
-            <div id="calendar">
-                <!-- Calendar days will be rendered here -->
-            </div>
-            <button id="backToDashboardFromCalendarBtn"
-                class="mt-6 bg-gray-300 text-gray-800 px-6 py-2 rounded-lg hover:bg-gray-400 transition duration-300 ease-in-out">ڈیش
+<svg class="h-5 w-5 text-gray-500 hover:text-gray-700" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" fill-rule="evenodd"></path>
+</svg>
+<span class="info-box-content" id="calendarInfo"></span>
+</span>
+</h2>
+<div class="flex justify-between items-center mb-4">
+<button class="bg-gray-200 text-gray-700 px-3 py-1 rounded-md hover:bg-gray-300" id="prevMonthBtn">&lt;</button>
+<h3 class="text-xl font-semibold" id="currentMonthYear"></h3>
+<button class="bg-gray-200 text-gray-700 px-3 py-1 rounded-md hover:bg-gray-300" id="nextMonthBtn">&gt;</button>
+</div>
+<div id="calendar">
+<!-- Calendar days will be rendered here -->
+</div>
+<button class="mt-6 bg-gray-300 text-gray-800 px-6 py-2 rounded-lg hover:bg-gray-400 transition duration-300 ease-in-out" id="backToDashboardFromCalendarBtn">ڈیش
                 بورڈ پر واپس</button>
-        </section>
-    </main>
-
-    <footer class="bg-gray-800 text-white p-4 text-center text-sm mt-auto">
-        <div class="container mx-auto">
-            <p id="copyrightText">&copy; 2023 حنفی طہارت ٹریکر۔ تمام حقوق محفوظ ہیں۔</p>
-            <p class="mt-2 text-gray-400" id="disclaimerText">
+</section>
+</main>
+<footer class="bg-gray-800 text-white p-4 text-center text-sm mt-auto">
+<div class="container mx-auto">
+<p id="copyrightText">© 2023 حنفی طہارت ٹریکر۔ تمام حقوق محفوظ ہیں۔</p>
+<p class="mt-2 text-gray-400" id="disclaimerText">
                 یہ ایپلیکیشن ایک مفید ٹول کے طور پر ہے اور حنفی فقہ کے اصولوں پر مبنی ہے۔ یہ کسی مستند اسلامی اسکالر
                 (مفتی) کی رہنمائی کا متبادل نہیں ہے۔ کسی بھی طبی مسئلے کے لیے، براہ کرم صحت کی دیکھ بھال کرنے والے ماہر
                 سے مشورہ کریں۔
             </p>
-            <div class="mt-2">
-                <button id="exportDataBtn"
-                    class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition duration-300 mr-2">ڈیٹا
+<div class="mt-2">
+<button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition duration-300 mr-2" id="exportDataBtn">ڈیٹا
                     ایکسپورٹ کریں</button>
-                <input type="file" id="importDataInput" accept=".json" class="hidden">
-                <button id="importDataBtn"
-                    class="bg-yellow-600 hover:bg-yellow-700 text-white px-4 py-2 rounded-md transition duration-300">ڈیٹا
+<input accept=".json" class="hidden" id="importDataInput" type="file"/>
+<button class="bg-yellow-600 hover:bg-yellow-700 text-white px-4 py-2 rounded-md transition duration-300" id="importDataBtn">ڈیٹا
                     امپورٹ کریں</button>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Modals -->
-
-    <!-- Initial Status Prompt Modal -->
-    <div id="initialStatusModal"
-        class="modal fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 z-50">
-        <div class="bg-white p-8 rounded-lg shadow-2xl max-w-md w-full text-center">
-            <h3 class="text-2xl font-bold mb-6 text-green-700" id="initialStatusModalTitle">آپ کی موجودہ حیثیت کیا ہے؟
+</div>
+</div>
+</footer>
+<!-- Modals -->
+<!-- Initial Status Prompt Modal -->
+<div class="modal fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 z-50" id="initialStatusModal">
+<div class="bg-white p-8 rounded-lg shadow-2xl max-w-md w-full text-center">
+<h3 class="text-2xl font-bold mb-6 text-green-700" id="initialStatusModalTitle">آپ کی موجودہ حیثیت کیا ہے؟
             </h3>
-            <p class="mb-6 text-lg" id="initialStatusQuestion">کیا آپ ابھی پاک (طاہر) ہیں یا خون آ رہا ہے؟</p>
-            <div class="flex flex-col space-y-4">
-                <button id="statusTuhrBtn"
-                    class="bg-green-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition duration-300">میں
+<p class="mb-6 text-lg" id="initialStatusQuestion">کیا آپ ابھی پاک (طاہر) ہیں یا خون آ رہا ہے؟</p>
+<div class="flex flex-col space-y-4">
+<button class="bg-green-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition duration-300" id="statusTuhrBtn">میں
                     پاک (طاہر) ہوں۔</button>
-                <button id="statusBleedingBtn"
-                    class="bg-red-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-red-700 transition duration-300">مجھے
+<button class="bg-red-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-red-700 transition duration-300" id="statusBleedingBtn">مجھے
                     خون آ رہا ہے۔</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Welcome Modal -->
-    <div id="welcomeModal"
-        class="modal fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 z-50">
-        <div class="bg-white p-8 rounded-lg shadow-2xl max-w-md w-full text-center">
-            <h3 class="text-2xl font-bold mb-6 text-green-700" id="welcomeModalTitle">حنفی طہارت ٹریکر میں خوش آمدید!
+</div>
+</div>
+</div>
+<!-- Welcome Modal -->
+<div class="modal fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 z-50" id="welcomeModal">
+<div class="bg-white p-8 rounded-lg shadow-2xl max-w-md w-full text-center">
+<h3 class="text-2xl font-bold mb-6 text-green-700" id="welcomeModalTitle">حنفی طہارت ٹریکر میں خوش آمدید!
             </h3>
-            <p class="mb-6 text-lg flex items-center justify-center" id="welcomeQuestion">
+<p class="mb-6 text-lg flex items-center justify-center" id="welcomeQuestion">
                 کیا آپ نے پہلے کبھی صحیح حیض کا تجربہ کیا ہے؟
                 <span class="info-box mr-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 hover:text-gray-700"
-                        viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                            clip-rule="evenodd" />
-                    </svg>
-                    <span class="info-box-content" id="welcomeInfo"></span>
-                </span>
-            </p>
-            <div class="flex flex-col space-y-4">
-                <button id="mubtadiahBtn"
-                    class="bg-green-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition duration-300">نہیں،
+<svg class="h-5 w-5 text-gray-500 hover:text-gray-700" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" fill-rule="evenodd"></path>
+</svg>
+<span class="info-box-content" id="welcomeInfo"></span>
+</span>
+</p>
+<div class="flex flex-col space-y-4">
+<button class="bg-green-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition duration-300" id="mubtadiahBtn">نہیں،
                     یہ میرا پہلا موقع ہے۔</button>
-                <button id="mutadahBtn"
-                    class="bg-blue-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-blue-700 transition duration-300">ہاں،
+<button class="bg-blue-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-blue-700 transition duration-300" id="mutadahBtn">ہاں،
                     میری عادت ہے۔</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Mutadah Habit Input Modal -->
-    <div id="mutadahHabitModal"
-        class="modal fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 z-50">
-        <div class="bg-white p-8 rounded-lg shadow-2xl max-w-md w-full">
-            <h3 class="text-2xl font-bold mb-6 text-green-700 flex items-center" id="habitModalTitle">
+</div>
+</div>
+</div>
+<!-- Mutadah Habit Input Modal -->
+<div class="modal fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 z-50" id="mutadahHabitModal">
+<div class="bg-white p-8 rounded-lg shadow-2xl max-w-md w-full">
+<h3 class="text-2xl font-bold mb-6 text-green-700 flex items-center" id="habitModalTitle">
                 اپنی عادات درج کریں
                 <span class="info-box mr-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 hover:text-gray-700"
-                        viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                            clip-rule="evenodd" />
-                    </svg>
-                    <span class="info-box-content" id="habitInputInfo"></span>
-                </span>
-            </h3>
-            <div class="mb-4">
-                <label for="haidhAdahDays" class="block text-gray-700 text-sm font-bold mb-2 flex items-center"
-                    id="haidhAdahLabel">
+<svg class="h-5 w-5 text-gray-500 hover:text-gray-700" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" fill-rule="evenodd"></path>
+</svg>
+<span class="info-box-content" id="habitInputInfo"></span>
+</span>
+</h3>
+<div class="mb-4">
+<label class="block text-gray-700 text-sm font-bold mb-2 flex items-center" for="haidhAdahDays" id="haidhAdahLabel">
                     آخری صحیح حیض کی مدت (دن):
                     <span class="info-box mr-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 hover:text-gray-700"
-                            viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd"
-                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                                clip-rule="evenodd" />
-                        </svg>
-                        <span class="info-box-content" id="haidhAdahInfo"></span>
-                    </span>
-                </label>
-                <input type="number" id="haidhAdahDays"
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-right"
-                    min="3" max="10" required>
-            </div>
-            <div class="mb-6">
-                <label for="tuhrAdahDays" class="block text-gray-700 text-sm font-bold mb-2 flex items-center"
-                    id="tuhrAdahLabel">
+<svg class="h-5 w-5 text-gray-500 hover:text-gray-700" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" fill-rule="evenodd"></path>
+</svg>
+<span class="info-box-content" id="haidhAdahInfo"></span>
+</span>
+</label>
+<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-right" id="haidhAdahDays" max="10" min="3" required="" type="number"/>
+</div>
+<div class="mb-6">
+<label class="block text-gray-700 text-sm font-bold mb-2 flex items-center" for="tuhrAdahDays" id="tuhrAdahLabel">
                     آخری صحیح طہارت کی مدت (دن):
                     <span class="info-box mr-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 hover:text-gray-700"
-                            viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd"
-                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                                clip-rule="evenodd" />
-                        </svg>
-                        <span class="info-box-content" id="tuhrAdahInfo"></span>
-                    </span>
-                </label>
-                <input type="number" id="tuhrAdahDays"
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-right"
-                    min="15" required>
-            </div>
-            <button id="saveMutadahHabitBtn"
-                class="w-full bg-green-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition duration-300">عادات
+<svg class="h-5 w-5 text-gray-500 hover:text-gray-700" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" fill-rule="evenodd"></path>
+</svg>
+<span class="info-box-content" id="tuhrAdahInfo"></span>
+</span>
+</label>
+<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-right" id="tuhrAdahDays" min="15" required="" type="number"/>
+</div>
+<button class="w-full bg-green-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition duration-300" id="saveMutadahHabitBtn">عادات
                 محفوظ کریں</button>
-        </div>
-    </div>
-
-    <!-- Date/Time Picker Modal -->
-    <div id="dateTimeModal"
-        class="modal fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 z-50">
-        <div class="bg-white p-8 rounded-lg shadow-2xl max-w-md w-full">
-            <h3 id="dateTimeModalTitle" class="text-2xl font-bold mb-6 text-green-700">تاریخ اور وقت منتخب کریں</h3>
-            <div class="mb-4">
-                <label for="datePicker" class="block text-gray-700 text-sm font-bold mb-2" id="dateLabel">تاریخ:</label>
-                <input type="date" id="datePicker"
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-right"
-                    required>
-            </div>
-            <div class="mb-6">
-                <label for="timePicker" class="block text-gray-700 text-sm font-bold mb-2" id="timeLabel">وقت:</label>
-                <input type="time" id="timePicker"
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-right"
-                    required>
-            </div>
-            <div class="mb-6" id="spottingTypeContainer">
-                <label for="spottingType" class="block text-gray-700 text-sm font-bold mb-2"
-                    id="spottingTypeLabel">خون/اخراج کی قسم:</label>
-                <select id="spottingType"
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-right">
-                    <option value="red">سرخ</option>
-                    <option value="dark-red">گہرا سرخ</option>
-                    <option value="brown">بھورا (کدرہ)</option>
-                    <option value="yellow">پیلا (صفرہ)</option>
-                    <option value="black">کالا</option>
-                    <option value="other">دیگر</option>
-                </select>
-            </div>
-            <div class="mb-6" id="notesContainer">
-                <label for="eventNotes" class="block text-gray-700 text-sm font-bold mb-2" id="notesLabel">نوٹس:</label>
-                <textarea id="eventNotes" rows="3"
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-right"></textarea>
-            </div>
-            <button id="saveDateTimeBtn"
-                class="w-full bg-green-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition duration-300">محفوظ
+</div>
+</div>
+<!-- Date/Time Picker Modal -->
+<div class="modal fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 z-50" id="dateTimeModal">
+<div class="bg-white p-8 rounded-lg shadow-2xl max-w-md w-full">
+<h3 class="text-2xl font-bold mb-6 text-green-700" id="dateTimeModalTitle">تاریخ اور وقت منتخب کریں</h3>
+<div class="mb-4">
+<label class="block text-gray-700 text-sm font-bold mb-2" for="datePicker" id="dateLabel">تاریخ:</label>
+<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-right" id="datePicker" required="" type="date"/>
+</div>
+<div class="mb-6">
+<label class="block text-gray-700 text-sm font-bold mb-2" for="timePicker" id="timeLabel">وقت:</label>
+<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-right" id="timePicker" required="" type="time"/>
+</div>
+<div class="mb-6" id="spottingTypeContainer">
+<label class="block text-gray-700 text-sm font-bold mb-2" for="spottingType" id="spottingTypeLabel">خون/اخراج کی قسم:</label>
+<select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-right" id="spottingType">
+<option value="red">سرخ</option>
+<option value="dark-red">گہرا سرخ</option>
+<option value="brown">بھورا (کدرہ)</option>
+<option value="yellow">پیلا (صفرہ)</option>
+<option value="black">کالا</option>
+<option value="other">دیگر</option>
+</select>
+</div>
+<div class="mb-6" id="notesContainer">
+<label class="block text-gray-700 text-sm font-bold mb-2" for="eventNotes" id="notesLabel">نوٹس:</label>
+<textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-right" id="eventNotes" rows="3"></textarea>
+</div>
+<button class="w-full bg-green-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition duration-300" id="saveDateTimeBtn">محفوظ
                 کریں</button>
-            <button id="cancelDateTimeBtn"
-                class="w-full mt-3 bg-gray-300 text-gray-800 py-3 rounded-lg text-lg font-semibold hover:bg-gray-400 transition duration-300">منسوخ
+<button class="w-full mt-3 bg-gray-300 text-gray-800 py-3 rounded-lg text-lg font-semibold hover:bg-gray-400 transition duration-300" id="cancelDateTimeBtn">منسوخ
                 کریں</button>
-        </div>
-    </div>
-
-    <!-- Age Input Modal -->
-    <div id="ageModal" class="modal fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 z-50">
-        <div class="bg-white p-8 rounded-lg shadow-2xl max-w-md w-full">
-            <h3 class="text-2xl font-bold mb-6 text-green-700" id="ageModalTitle">اپنی عمر درج کریں</h3>
-            <div class="mb-4">
-                <label for="ageInput" class="block text-gray-700 text-sm font-bold mb-2" id="ageLabel">آپ کی قمری عمر
+</div>
+</div>
+<!-- Age Input Modal -->
+<div class="modal fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 z-50" id="ageModal">
+<div class="bg-white p-8 rounded-lg shadow-2xl max-w-md w-full">
+<h3 class="text-2xl font-bold mb-6 text-green-700" id="ageModalTitle">اپنی عمر درج کریں</h3>
+<div class="mb-4">
+<label class="block text-gray-700 text-sm font-bold mb-2" for="ageInput" id="ageLabel">آپ کی قمری عمر
                     (سال میں):</label>
-                <input type="number" id="ageInput"
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-right"
-                    min="9" required>
-            </div>
-            <button id="saveAgeBtn"
-                class="w-full bg-green-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition duration-300">عمر
+<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-right" id="ageInput" min="9" required="" type="number"/>
+</div>
+<button class="w-full bg-green-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition duration-300" id="saveAgeBtn">عمر
                 محفوظ کریں</button>
-        </div>
-    </div>
-
-
-    <script>
+</div>
+</div>
+<script>
         // Language Data
         const translations = {
             ur: {
@@ -1812,6 +1735,22 @@
         document.addEventListener('DOMContentLoaded', initializeApp);
 
     </script>
-</body>
+<script type="module">
+  import { Workbox } from 'https://storage.googleapis.com/workbox-cdn/releases/7.0.0/workbox-window.prod.mjs';
 
+  const swUrl = './sw.js';
+  const wb = new Workbox(swUrl);
+
+  wb.addEventListener('waiting', () => {
+    console.log('A new service worker is waiting to activate.');
+    wb.messageSW({ type: 'SKIP_WAITING' });
+  });
+
+  wb.addEventListener('controlling', () => {
+    console.log('The new service worker is now in control. Reloading page for updates...');
+    window.location.reload();
+  });
+
+  wb.register();
+</script></body>
 </html>
