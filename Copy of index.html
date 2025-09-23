@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Yasin Ullah, Pakistan">
     <meta name="description"
-        content="حنفی طہارت ٹریکر مسلم خواتین کو حنفی (دیوبند) فقہ کے اصولوں کے مطابق حیض، استحاضہ، نفاس، اور طہارت کے دنوں کو درست طریقے سے ٹریک اور شمار کرنے میں مدد کرتا ہے۔ یہ مقامی ڈیٹا سٹوریج کے لیے انڈیکسڈ ڈی بی کا استعمال کرتا ہے۔ اس میں سائیکل کا کیلنڈر، نوٹس، اور اہم فقہی رہنمائی شامل ہے۔">
+        content="حنفی طہارت ٹریکر مسلم خواتین کو حنفی (دیوبند) فقہ کے اصولوں کے مطابق حیض، استحاضہ، نفاس، اور طہارت کے دنوں کو درست طریقے سے ٹریک اور شمار کرنے میں مدد کرتا ہے۔ یہ مقامی ڈیٹا سٹوریج کے لیے انڈیکسڈ ڈی بی کا استعمال کرتا ہے۔">
     <meta name="keywords"
-        content="حنفی، فقہ، طہارت ٹریکر، حیض، استحاضہ، نفاس، طہارت، مسلم خواتین، انڈیکسڈ ڈی بی، دیوبند، اسلامی طہارت، نفاس ٹریکر، عادت، ایدہ، ٹریکر، ماہواری کیلنڈر، نماز قضا، روزہ قضا، قدریہ، سفرہ، سن الیاس">
+        content="حنفی، فقہ، طہارت ٹریکر، حیض، استحاضہ، نفاس، طہارت، مسلم خواتین، انڈیکسڈ ڈی بی، دیوبند، اسلامی طہارت، نفاس ٹریکر، عادت، ایدہ، ٹریکر">
     <title>حنفی طہارت ٹریکر - اسلامی خواتین کی طہارت اور نفاس ٹریکنگ</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
@@ -52,7 +52,7 @@
             border-radius: 4px;
             padding: 10px;
             z-index: 1000;
-            width: 280px;
+            width: 250px;
             right: 0;
             /* For RTL alignment */
             top: 100%;
@@ -67,74 +67,6 @@
             display: block;
         }
 
-        /* Calendar styles */
-        #calendar {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 2px;
-            font-size: 0.8rem;
-            text-align: center;
-        }
-
-        .day-header {
-            background-color: #e2e8f0;
-            padding: 4px;
-            font-weight: bold;
-        }
-
-        .day-cell {
-            padding: 6px 2px;
-            border: 1px solid #e2e8f0;
-            min-height: 50px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: flex-end;
-            position: relative;
-            text-align: right;
-        }
-
-        .day-cell.inactive {
-            background-color: #f8f8f8;
-            color: #a0aec0;
-        }
-
-        .day-cell.today {
-            border: 2px solid #38a169;
-            background-color: #ecfdf5;
-        }
-
-        .day-number {
-            font-weight: bold;
-            font-size: 0.9em;
-            width: 100%;
-            text-align: left;
-            padding-right: 4px;
-        }
-
-        .cycle-marker {
-            width: 100%;
-            height: 4px;
-            border-radius: 2px;
-            margin-top: 2px;
-        }
-
-        .cycle-marker.haidh {
-            background-color: #ef4444;
-        }
-
-        .cycle-marker.istihadah {
-            background-color: #3b82f6;
-        }
-
-        .cycle-marker.nifas {
-            background-color: #9333ea;
-        }
-
-        .cycle-marker.tuhr {
-            background-color: #10b981;
-        }
-
         /* Adjust for RTL */
         .text-right {
             text-align: right;
@@ -144,10 +76,6 @@
         input[type="date"],
         input[type="time"] {
             direction: rtl;
-        }
-
-        #calendar .day-number {
-            text-align: right;
         }
     </style>
 </head>
@@ -160,10 +88,7 @@
                 <button id="langToggleBtn"
                     class="bg-white text-green-700 px-3 py-1 rounded-full text-sm hover:bg-green-100 transition duration-300 ease-in-out">English</button>
                 <button id="historyBtn"
-                    class="bg-white text-green-700 px-4 py-2 rounded-full hover:bg-green-100 transition duration-300 ease-in-out">سائیکل
-                    ہسٹری</button>
-                <button id="calendarBtn"
-                    class="bg-white text-green-700 px-4 py-2 rounded-full hover:bg-green-100 transition duration-300 ease-in-out">کیلنڈر</button>
+                    class="bg-white text-green-700 px-4 py-2 rounded-full hover:bg-green-100 transition duration-300 ease-in-out">سائیکل ہسٹری</button>
             </nav>
         </div>
     </header>
@@ -176,7 +101,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 hover:text-gray-700"
                         viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd"
-                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1  0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
                             clip-rule="evenodd" />
                     </svg>
                     <span class="info-box-content" id="dashboardInfo"></span>
@@ -188,7 +113,7 @@
             </div>
             <div id="habitDisplay"
                 class="mb-6 p-4 bg-blue-50 text-blue-800 border-r-4 border-blue-500 rounded-md text-lg flex items-center">
-                <p id="habitStatus">آپ کی عادت (عادہ): ابھی سیٹ نہیں ہوئی۔</p>
+                <p id="habitStatus">آپ کی عادت (عادہ): ابھی سیٹ نہیں ہوئی ہے۔</p>
                 <span class="info-box mr-2">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 hover:text-gray-700"
                         viewBox="0 0 20 20" fill="currentColor">
@@ -205,8 +130,7 @@
                 لوڈ ہو رہا ہے...
             </button>
             <button id="logNifasBtn"
-                class="w-full mt-3 bg-purple-600 text-white py-3 rounded-lg text-xl font-bold hover:bg-purple-700 transition duration-300 ease-in-out hidden">نفاس
-                لاگ کریں</button>
+                class="w-full mt-3 bg-purple-600 text-white py-3 rounded-lg text-xl font-bold hover:bg-purple-700 transition duration-300 ease-in-out hidden">نفاس لاگ کریں</button>
         </section>
 
         <section id="cycleHistorySection" class="bg-white p-6 rounded-lg shadow-xl mb-8 hidden">
@@ -215,36 +139,7 @@
                 <p class="text-gray-600" id="noHistory">ابھی تک کوئی سائیکل ہسٹری دستیاب نہیں ہے۔</p>
             </div>
             <button id="backToDashboardBtn"
-                class="mt-6 bg-gray-300 text-gray-800 px-6 py-2 rounded-lg hover:bg-gray-400 transition duration-300 ease-in-out">ڈیش
-                بورڈ پر واپس</button>
-        </section>
-
-        <section id="calendarSection" class="bg-white p-6 rounded-lg shadow-xl mb-8 hidden">
-            <h2 class="text-2xl font-semibold mb-4 text-green-700 flex items-center" id="calendarTitle">
-                سائیکل کیلنڈر
-                <span class="info-box mr-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 hover:text-gray-700"
-                        viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                            clip-rule="evenodd" />
-                    </svg>
-                    <span class="info-box-content" id="calendarInfo"></span>
-                </span>
-            </h2>
-            <div class="flex justify-between items-center mb-4">
-                <button id="prevMonthBtn"
-                    class="bg-gray-200 text-gray-700 px-3 py-1 rounded-md hover:bg-gray-300">&lt;</button>
-                <h3 id="currentMonthYear" class="text-xl font-semibold"></h3>
-                <button id="nextMonthBtn"
-                    class="bg-gray-200 text-gray-700 px-3 py-1 rounded-md hover:bg-gray-300">&gt;</button>
-            </div>
-            <div id="calendar">
-                <!-- Calendar days will be rendered here -->
-            </div>
-            <button id="backToDashboardFromCalendarBtn"
-                class="mt-6 bg-gray-300 text-gray-800 px-6 py-2 rounded-lg hover:bg-gray-400 transition duration-300 ease-in-out">ڈیش
-                بورڈ پر واپس</button>
+                class="mt-6 bg-gray-300 text-gray-800 px-6 py-2 rounded-lg hover:bg-gray-400 transition duration-300 ease-in-out">ڈیش بورڈ پر واپس</button>
         </section>
     </main>
 
@@ -258,35 +153,15 @@
             </p>
             <div class="mt-2">
                 <button id="exportDataBtn"
-                    class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition duration-300 mr-2">ڈیٹا
-                    ایکسپورٹ کریں</button>
+                    class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition duration-300 mr-2">ڈیٹا ایکسپورٹ کریں</button>
                 <input type="file" id="importDataInput" accept=".json" class="hidden">
                 <button id="importDataBtn"
-                    class="bg-yellow-600 hover:bg-yellow-700 text-white px-4 py-2 rounded-md transition duration-300">ڈیٹا
-                    امپورٹ کریں</button>
+                    class="bg-yellow-600 hover:bg-yellow-700 text-white px-4 py-2 rounded-md transition duration-300">ڈیٹا امپورٹ کریں</button>
             </div>
         </div>
     </footer>
 
     <!-- Modals -->
-
-    <!-- Initial Status Prompt Modal -->
-    <div id="initialStatusModal"
-        class="modal fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 z-50">
-        <div class="bg-white p-8 rounded-lg shadow-2xl max-w-md w-full text-center">
-            <h3 class="text-2xl font-bold mb-6 text-green-700" id="initialStatusModalTitle">آپ کی موجودہ حیثیت کیا ہے؟
-            </h3>
-            <p class="mb-6 text-lg" id="initialStatusQuestion">کیا آپ ابھی پاک (طاہر) ہیں یا خون آ رہا ہے؟</p>
-            <div class="flex flex-col space-y-4">
-                <button id="statusTuhrBtn"
-                    class="bg-green-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition duration-300">میں
-                    پاک (طاہر) ہوں۔</button>
-                <button id="statusBleedingBtn"
-                    class="bg-red-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-red-700 transition duration-300">مجھے
-                    خون آ رہا ہے۔</button>
-            </div>
-        </div>
-    </div>
 
     <!-- Welcome Modal -->
     <div id="welcomeModal"
@@ -370,8 +245,7 @@
                     min="15" required>
             </div>
             <button id="saveMutadahHabitBtn"
-                class="w-full bg-green-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition duration-300">عادات
-                محفوظ کریں</button>
+                class="w-full bg-green-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition duration-300">عادات محفوظ کریں</button>
         </div>
     </div>
 
@@ -392,50 +266,12 @@
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-right"
                     required>
             </div>
-            <div class="mb-6" id="spottingTypeContainer">
-                <label for="spottingType" class="block text-gray-700 text-sm font-bold mb-2"
-                    id="spottingTypeLabel">خون/اخراج کی قسم:</label>
-                <select id="spottingType"
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-right">
-                    <option value="red">سرخ</option>
-                    <option value="dark-red">گہرا سرخ</option>
-                    <option value="brown">بھورا (کدرہ)</option>
-                    <option value="yellow">پیلا (صفرہ)</option>
-                    <option value="black">کالا</option>
-                    <option value="other">دیگر</option>
-                </select>
-            </div>
-            <div class="mb-6" id="notesContainer">
-                <label for="eventNotes" class="block text-gray-700 text-sm font-bold mb-2" id="notesLabel">نوٹس:</label>
-                <textarea id="eventNotes" rows="3"
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-right"></textarea>
-            </div>
             <button id="saveDateTimeBtn"
-                class="w-full bg-green-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition duration-300">محفوظ
-                کریں</button>
+                class="w-full bg-green-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition duration-300">محفوظ کریں</button>
             <button id="cancelDateTimeBtn"
-                class="w-full mt-3 bg-gray-300 text-gray-800 py-3 rounded-lg text-lg font-semibold hover:bg-gray-400 transition duration-300">منسوخ
-                کریں</button>
+                class="w-full mt-3 bg-gray-300 text-gray-800 py-3 rounded-lg text-lg font-semibold hover:bg-gray-400 transition duration-300">منسوخ کریں</button>
         </div>
     </div>
-
-    <!-- Age Input Modal -->
-    <div id="ageModal" class="modal fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 z-50">
-        <div class="bg-white p-8 rounded-lg shadow-2xl max-w-md w-full">
-            <h3 class="text-2xl font-bold mb-6 text-green-700" id="ageModalTitle">اپنی عمر درج کریں</h3>
-            <div class="mb-4">
-                <label for="ageInput" class="block text-gray-700 text-sm font-bold mb-2" id="ageLabel">آپ کی قمری عمر
-                    (سال میں):</label>
-                <input type="number" id="ageInput"
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-right"
-                    min="9" required>
-            </div>
-            <button id="saveAgeBtn"
-                class="w-full bg-green-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition duration-300">عمر
-                محفوظ کریں</button>
-        </div>
-    </div>
-
 
     <script>
         // Language Data
@@ -444,7 +280,6 @@
                 dir: 'rtl',
                 appTitle: 'حنفی طہارت ٹریکر',
                 historyButtonText: 'سائیکل ہسٹری',
-                calendarBtnText: 'کیلنڈر',
                 dashboardTitle: 'ڈیش بورڈ',
                 dashboardInfo: 'یہاں آپ کو اپنی موجودہ طہارت کی حیثیت اور اگلے عمل کی رہنمائی ملے گی۔',
                 loadingStatus: 'حیثیت لوڈ ہو رہی ہے...',
@@ -452,11 +287,6 @@
                 habitInfo: 'عادت سے مراد آپ کے حیض اور طہارت کے دنوں کی عام اور مستحکم مدت ہے۔ یہ فقہی احکام کے تعین میں بہت اہم ہے۔',
                 mainActionButtonLoading: 'لوڈ ہو رہا ہے...',
                 logNifasText: 'نفاس لاگ کریں',
-
-                initialStatusModalTitle: 'آپ کی موجودہ حیثیت کیا ہے؟',
-                initialStatusQuestion: 'کیا آپ ابھی پاک (طاہر) ہیں یا خون آ رہا ہے؟',
-                statusTuhrBtn: 'میں پاک (طاہر) ہوں۔',
-                statusBleedingBtn: 'مجھے خون آ رہا ہے۔',
 
                 welcomeModalTitle: 'حنفی طہارت ٹریکر میں خوش آمدید!',
                 welcomeQuestion: 'کیا آپ نے پہلے کبھی صحیح حیض کا تجربہ کیا ہے؟',
@@ -478,20 +308,8 @@
                 dateTimeModalTitleNifasEnd: 'نفاس کا اختتام منتخب کریں',
                 dateLabel: 'تاریخ:',
                 timeLabel: 'وقت:',
-                spottingTypeLabel: 'خون/اخراج کی قسم:',
-                spottingTypeRed: 'سرخ',
-                spottingTypeDarkRed: 'گہرا سرخ',
-                spottingTypeBrown: 'بھورا (کدرہ)',
-                spottingTypeYellow: 'پیلا (صفرہ)',
-                spottingTypeBlack: 'کالا',
-                spottingTypeOther: 'دیگر',
-                notesLabel: 'نوٹس:',
                 saveButtonText: 'محفوظ کریں',
                 cancelButtonText: 'منسوخ کریں',
-
-                ageModalTitle: 'اپنی عمر درج کریں',
-                ageLabel: 'آپ کی قمری عمر (سال میں):',
-                saveAgeBtn: 'عمر محفوظ کریں',
 
                 currentStatusTuhr: 'موجودہ حیثیت: طہارت (پاکیزگی)۔ آپ نماز اور روزے کی مکلف ہیں۔',
                 currentStatusBleeding: (startTime) => `موجودہ حیثیت: خون آنا ${startTime} کو شروع ہوا ہے۔ جب یہ رکے تو اختتامی وقت درج کریں۔`,
@@ -519,13 +337,6 @@
                 purityBefore: (days) => `اس سے پہلے کی طہارت: ${days} دن`,
                 noteCombinedFlow: 'نوٹ: ناکافی طہارت کی وجہ سے یہ خون پچھلے خون کے ساتھ ملا دیا گیا ہے۔',
 
-                calendarTitle: 'سائیکل کیلنڈر',
-                calendarInfo: 'یہ کیلنڈر آپ کے حیض، طہارت، اور نفاس کے ایام کو رنگوں میں دکھاتا ہے۔',
-                backToDashboardFromCalendarBtn: 'ڈیش بورڈ پر واپس',
-                dayNames: ['اتوار', 'پیر', 'منگل', 'بدھ', 'جمعرات', 'جمعہ', 'ہفتہ'],
-                monthNames: ['جنوری', 'فروری', 'مارچ', 'اپریل', 'مئی', 'جون', 'جولائی', 'اگست', 'ستمبر', 'اکتوبر', 'نومبر', 'دسمبر'],
-
-
                 copyrightText: '&copy; 2023 حنفی طہارت ٹریکر۔ تمام حقوق محفوظ ہیں۔',
                 disclaimerText: 'یہ ایپلیکیشن ایک مفید ٹول کے طور پر ہے اور حنفی فقہ کے اصولوں پر مبنی ہے۔ یہ کسی مستند اسلامی اسکالر (مفتی) کی رہنمائی کا متبادل نہیں ہے۔ کسی بھی طبی مسئلے کے لیے، براہ کرم صحت کی دیکھ بھال کرنے والے ماہر سے مشورہ کریں۔',
                 exportDataButtonText: 'ڈیٹا ایکسپورٹ کریں',
@@ -533,7 +344,6 @@
 
                 alertHaidhDurationInvalid: 'براہ کرم حیض کی ایک درست مدت (3 اور 10 دن کے درمیان) درج کریں۔',
                 alertTuhrDurationInvalid: 'براہ کرم طہارت کی ایک درست مدت (کم از کم 15 دن) درج کریں۔',
-                alertAgeInvalid: 'براہ کرم قمری عمر کم از کم 9 سال درج کریں (فقہی بلوغت کی کم از کم عمر)۔',
                 alertSelectDateTime: 'براہ کرم تاریخ اور وقت دونوں منتخب کریں۔',
                 alertBleedingBeforeLastHaidhEnd: 'خون پچھلے حیض کے اختتام سے پہلے شروع نہیں ہو سکتا۔',
                 alertBleedingStartLogged: 'خون آنے کا وقت کامیابی سے درج کر لیا گیا!',
@@ -555,7 +365,6 @@
                 dir: 'ltr',
                 appTitle: 'Hanafi Purity Tracker',
                 historyButtonText: 'Cycle History',
-                calendarBtnText: 'Calendar',
                 dashboardTitle: 'Dashboard',
                 dashboardInfo: 'Here you will find your current purity status and guidance for the next action.',
                 loadingStatus: 'Loading status...',
@@ -563,11 +372,6 @@
                 habitInfo: 'Adah refers to your typical and stable duration for Haidh (menstruation) and Tuhr (purity). It\'s crucial for determining Fiqhi rulings.',
                 mainActionButtonLoading: 'Loading...',
                 logNifasText: 'Log Nifas',
-
-                initialStatusModalTitle: 'What is your current status?',
-                initialStatusQuestion: 'Are you currently pure (Tahir) or experiencing bleeding?',
-                statusTuhrBtn: 'I am pure (Tahir).',
-                statusBleedingBtn: 'I am bleeding.',
 
                 welcomeModalTitle: 'Welcome to Hanafi Purity Tracker!',
                 welcomeQuestion: 'Have you experienced a valid menstrual period before?',
@@ -589,20 +393,8 @@
                 dateTimeModalTitleNifasEnd: 'Select Nifas End Date and Time',
                 dateLabel: 'Date:',
                 timeLabel: 'Time:',
-                spottingTypeLabel: 'Bleeding/Discharge Type:',
-                spottingTypeRed: 'Red',
-                spottingTypeDarkRed: 'Dark Red',
-                spottingTypeBrown: 'Brown (Kudrah)',
-                spottingTypeYellow: 'Yellow (Sufrah)',
-                spottingTypeBlack: 'Black',
-                spottingTypeOther: 'Other',
-                notesLabel: 'Notes:',
                 saveButtonText: 'Save',
                 cancelButtonText: 'Cancel',
-
-                ageModalTitle: 'Enter Your Age',
-                ageLabel: 'Your Lunar Age (in years):',
-                saveAgeBtn: 'Save Age',
 
                 currentStatusTuhr: 'Current Status: Purity (Tuhr). You are obligated to pray and fast.',
                 currentStatusBleeding: (startTime) => `Current Status: Bleeding started on ${startTime}. Log the end time when it stops.`,
@@ -630,13 +422,6 @@
                 purityBefore: (days) => `Purity before: ${days} days`,
                 noteCombinedFlow: 'Note: This bleeding was combined with previous flow due to insufficient purity.',
 
-                calendarTitle: 'Cycle Calendar',
-                calendarInfo: 'This calendar visually represents your Haidh, Tuhr, and Nifas days with colors.',
-                backToDashboardFromCalendarBtn: 'Back to Dashboard',
-                dayNames: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-                monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-
-
                 copyrightText: '&copy; 2023 Hanafi Purity Tracker. All rights reserved.',
                 disclaimerText: 'This application is intended as a helpful tool and is based on the principles of the Hanafi school of Fiqh. It is not a substitute for guidance from a qualified Islamic scholar (Mufti). For any medical issues, please consult a healthcare professional.',
                 exportDataButtonText: 'Export Data',
@@ -644,7 +429,6 @@
 
                 alertHaidhDurationInvalid: 'Please enter a valid Haidh duration between 3 and 10 days.',
                 alertTuhrDurationInvalid: 'Please enter a valid Tuhr duration (minimum 15 days).',
-                alertAgeInvalid: 'Please enter a lunar age of at least 9 years (minimum age of Fiqhi puberty).',
                 alertSelectDateTime: 'Please select both date and time.',
                 alertBleedingBeforeLastHaidhEnd: 'Bleeding cannot start before the end of the last Haidh period if purity was less than 15 days.',
                 alertBleedingStartLogged: 'Bleeding start logged successfully!',
@@ -666,7 +450,6 @@
 
         let currentLang = 'ur';
         let currentMode = 'haidh'; // 'haidh' or 'nifas'
-        let currentCalendarDate = new Date(); // For the calendar view
 
         function setLanguage(lang) {
             currentLang = lang;
@@ -676,9 +459,6 @@
             // Update all elements with dynamic IDs or specific class/attribute for text
             document.getElementById('appTitle').textContent = translations[lang].appTitle;
             document.getElementById('historyBtn').textContent = translations[lang].historyButtonText;
-            document.getElementById('calendarBtn').textContent = translations[lang].calendarBtnText;
-
-            // Dashboard
             document.getElementById('dashboardTitle').childNodes[0].nodeValue = translations[lang].dashboardTitle; // To exclude info icon
             document.getElementById('dashboardInfo').textContent = translations[lang].dashboardInfo;
             document.getElementById('loadingStatus').textContent = translations[lang].loadingStatus;
@@ -687,20 +467,12 @@
             document.getElementById('mainActionButton').textContent = translations[lang].mainActionButtonLoading;
             document.getElementById('logNifasBtn').textContent = translations[lang].logNifasText;
 
-            // Initial Status Modal
-            document.getElementById('initialStatusModalTitle').textContent = translations[lang].initialStatusModalTitle;
-            document.getElementById('initialStatusQuestion').textContent = translations[lang].initialStatusQuestion;
-            document.getElementById('statusTuhrBtn').textContent = translations[lang].statusTuhrBtn;
-            document.getElementById('statusBleedingBtn').textContent = translations[lang].statusBleedingBtn;
-
-            // Welcome Modal
             document.getElementById('welcomeModalTitle').textContent = translations[lang].welcomeModalTitle;
             document.getElementById('welcomeQuestion').childNodes[0].nodeValue = translations[lang].welcomeQuestion; // To exclude info icon
             document.getElementById('welcomeInfo').textContent = translations[lang].welcomeInfo;
             document.getElementById('mubtadiahBtn').textContent = translations[lang].mubtadiahBtn;
             document.getElementById('mutadahBtn').textContent = translations[lang].mutadahBtn;
 
-            // Habit Modal
             document.getElementById('habitModalTitle').childNodes[0].nodeValue = translations[lang].habitModalTitle; // To exclude info icon
             document.getElementById('habitInputInfo').textContent = translations[lang].habitInputInfo;
             document.getElementById('haidhAdahLabel').childNodes[0].nodeValue = translations[lang].haidhAdahLabel; // To exclude info icon
@@ -709,71 +481,43 @@
             document.getElementById('tuhrAdahInfo').textContent = translations[lang].tuhrAdahInfo;
             document.getElementById('saveMutadahHabitBtn').textContent = translations[lang].saveHabitButtonText;
 
-            // DateTime Modal
-            // dateTimeModalTitle is dynamic
+            // DateTime Modal titles are dynamic based on action, handle that in respective functions
             document.getElementById('dateLabel').textContent = translations[lang].dateLabel;
             document.getElementById('timeLabel').textContent = translations[lang].timeLabel;
-            document.getElementById('spottingTypeLabel').textContent = translations[lang].spottingTypeLabel;
-            document.getElementById('spottingType').options[0].textContent = translations[lang].spottingTypeRed;
-            document.getElementById('spottingType').options[1].textContent = translations[lang].spottingTypeDarkRed;
-            document.getElementById('spottingType').options[2].textContent = translations[lang].spottingTypeBrown;
-            document.getElementById('spottingType').options[3].textContent = translations[lang].spottingTypeYellow;
-            document.getElementById('spottingType').options[4].textContent = translations[lang].spottingTypeBlack;
-            document.getElementById('spottingType').options[5].textContent = translations[lang].spottingTypeOther;
-            document.getElementById('notesLabel').textContent = translations[lang].notesLabel;
             document.getElementById('saveDateTimeBtn').textContent = translations[lang].saveButtonText;
             document.getElementById('cancelDateTimeBtn').textContent = translations[lang].cancelButtonText;
 
-            // Age Modal
-            document.getElementById('ageModalTitle').textContent = translations[lang].ageModalTitle;
-            document.getElementById('ageLabel').textContent = translations[lang].ageLabel;
-            document.getElementById('saveAgeBtn').textContent = translations[lang].saveAgeBtn;
-
-            // History Section
             document.getElementById('cycleHistoryTitle').textContent = translations[lang].cycleHistoryTitle;
             document.getElementById('noHistory').textContent = translations[lang].noHistory;
             document.getElementById('backToDashboardBtn').textContent = translations[lang].backToDashboardButtonText;
-
-            // Calendar Section
-            document.getElementById('calendarTitle').childNodes[0].nodeValue = translations[lang].calendarTitle; // To exclude info icon
-            document.getElementById('calendarInfo').textContent = translations[lang].calendarInfo;
-            document.getElementById('backToDashboardFromCalendarBtn').textContent = translations[lang].backToDashboardFromCalendarBtn;
-
-            // Footer
             document.getElementById('copyrightText').innerHTML = translations[lang].copyrightText; // Use .innerHTML for the © symbol
             document.getElementById('disclaimerText').textContent = translations[lang].disclaimerText;
             document.getElementById('exportDataBtn').textContent = translations[lang].exportDataButtonText;
             document.getElementById('importDataBtn').textContent = translations[lang].importDataButtonText;
 
 
-            // Set direction for date/time pickers and number inputs
-            const inputs = [datePicker, timePicker, haidhAdahDaysInput, tuhrAdahDaysInput, document.getElementById('ageInput')];
-            inputs.forEach(input => {
-                if (input) input.style.direction = translations[currentLang].dir;
-            });
-            if (document.getElementById('spottingType')) document.getElementById('spottingType').style.direction = translations[currentLang].dir;
-            if (document.getElementById('eventNotes')) document.getElementById('eventNotes').style.direction = translations[currentLang].dir;
-
+            // Set direction for date/time pickers
+            const datePicker = document.getElementById('datePicker');
+            const timePicker = document.getElementById('timePicker');
+            if (datePicker) datePicker.style.direction = translations[currentLang].dir;
+            if (timePicker) timePicker.style.direction = translations[currentLang].dir;
+            if (haidhAdahDaysInput) haidhAdahDaysInput.style.direction = translations[currentLang].dir;
+            if (tuhrAdahDaysInput) tuhrAdahDaysInput.style.direction = translations[currentLang].dir;
 
             updateDashboardUI(); // Refresh dashboard to apply language changes to dynamic text
             renderCycleHistory(); // Refresh history to apply language changes
-            if (!document.getElementById('calendarSection').classList.contains('hidden')) {
-                renderCalendar(currentCalendarDate); // Refresh calendar if visible
-            }
         }
 
         // IndexedDB Constants
         const DB_NAME = 'HanafiPurityDB';
         const STORE_NAME = 'userProfile';
-        const DB_VERSION = 3; // Incremented version for new structure and fields
+        const DB_VERSION = 2; // Incremented version for new structure
 
         // Fiqh Constants (in hours)
         const HAIDH_MIN = 72; // 3 days
         const HAIDH_MAX = 240; // 10 days
         const TUHR_MIN = 360; // 15 days
         const NIFAS_MAX = 960; // 40 days
-        const MENOPAUSE_LUNAR_AGE = 55; // Age of menopause in lunar years (approx. 53 solar years)
-        const MUBTADIAH_FIRST_HAIDH_MAX = 240; // Max 10 days for first Haidh for Mubtadiah
 
         // Global user profile object
         let userProfile = {
@@ -787,16 +531,12 @@
             currentBleedingStart: null, // Timestamp for the current bleeding episode (haidh/istihadah)
             currentNifasStart: null, // Timestamp for the current nifas episode
             cycleHistory: [], // An array of all past cycle objects (haidh, istihadah, nifas)
-            isPregnant: false, // New field for pregnancy status (Future use)
-            ageInLunarYears: 0, // Age for Menopause rulings
-            firstTimeSetupComplete: false, // To track initial setup flow
+            isPregnant: false, // New field for pregnancy status
+            ageInLunarYears: 0, // Placeholder for age, advanced rulings would use this
         };
 
         // DOM Elements
         const langToggleBtn = document.getElementById('langToggleBtn');
-        const initialStatusModal = document.getElementById('initialStatusModal');
-        const statusTuhrBtn = document.getElementById('statusTuhrBtn');
-        const statusBleedingBtn = document.getElementById('statusBleedingBtn');
         const welcomeModal = document.getElementById('welcomeModal');
         const mubtadiahBtn = document.getElementById('mubtadiahBtn');
         const mutadahBtn = document.getElementById('mutadahBtn');
@@ -804,9 +544,6 @@
         const haidhAdahDaysInput = document.getElementById('haidhAdahDays');
         const tuhrAdahDaysInput = document.getElementById('tuhrAdahDays');
         const saveMutadahHabitBtn = document.getElementById('saveMutadahHabitBtn');
-        const ageModal = document.getElementById('ageModal');
-        const ageInput = document.getElementById('ageInput');
-        const saveAgeBtn = document.getElementById('saveAgeBtn');
         const statusDisplay = document.getElementById('statusDisplay');
         const habitDisplay = document.getElementById('habitDisplay');
         const mainActionButton = document.getElementById('mainActionButton');
@@ -815,27 +552,15 @@
         const dateTimeModalTitle = document.getElementById('dateTimeModalTitle');
         const datePicker = document.getElementById('datePicker');
         const timePicker = document.getElementById('timePicker');
-        const spottingTypeContainer = document.getElementById('spottingTypeContainer');
-        const spottingType = document.getElementById('spottingType');
-        const notesContainer = document.getElementById('notesContainer');
-        const eventNotes = document.getElementById('eventNotes');
         const saveDateTimeBtn = document.getElementById('saveDateTimeBtn');
         const cancelDateTimeBtn = document.getElementById('cancelDateTimeBtn');
         const historyBtn = document.getElementById('historyBtn');
-        const calendarBtn = document.getElementById('calendarBtn');
         const cycleHistorySection = document.getElementById('cycleHistorySection');
         const historyList = document.getElementById('historyList');
         const backToDashboardBtn = document.getElementById('backToDashboardBtn');
-        const calendarSection = document.getElementById('calendarSection');
-        const currentMonthYear = document.getElementById('currentMonthYear');
-        const prevMonthBtn = document.getElementById('prevMonthBtn');
-        const nextMonthBtn = document.getElementById('nextMonthBtn');
-        const calendarEl = document.getElementById('calendar');
-        const backToDashboardFromCalendarBtn = document.getElementById('backToDashboardFromCalendarBtn');
         const exportDataBtn = document.getElementById('exportDataBtn');
         const importDataInput = document.getElementById('importDataInput');
         const importDataBtn = document.getElementById('importDataBtn');
-
 
         // IndexedDB Functions
         function openDB() {
@@ -847,10 +572,12 @@
                     if (!db.objectStoreNames.contains(STORE_NAME)) {
                         db.createObjectStore(STORE_NAME, { keyPath: 'id' });
                     }
-                    // For version 3, ensure new fields are initialized if upgrading from older versions
+                    // Add new fields if upgrading from an older version
                     const store = request.transaction.objectStore(STORE_NAME);
-                    // No explicit schema upgrade needed for new fields added to the object if `put` handles it.
-                    // However, if we were adding new indexes or changing keypaths, it would go here.
+                    // Example of adding index (not strictly needed for this simple profile object)
+                    // if (!store.indexNames.contains('lastHaidhEnd')) {
+                    //     store.createIndex('lastHaidhEnd', 'lastHaidhEnd', { unique: false });
+                    // }
                 };
 
                 request.onsuccess = (event) => {
@@ -928,26 +655,6 @@
             return Math.abs(new Date(end).getTime() - new Date(start).getTime()) / (1000 * 60 * 60);
         }
 
-        /**
-         * Converts a solar age to an approximate lunar age.
-         * For Fiqhi rulings, lunar age is often preferred.
-         * Simplified conversion: Solar year * (365.25 / 354.36)
-         * @param {number} solarYears
-         * @returns {number} lunarYears
-         */
-        function solarToLunarYears(solarYears) {
-            return Math.round(solarYears * (365.25 / 354.367)); // Approx. lunar year length
-        }
-
-        /**
-         * Checks if the user is considered to be in the age of menopause (Sinn al-Ya's).
-         * @returns {boolean} True if in menopause age, False otherwise.
-         */
-        function isMenopausalAge() {
-            return userProfile.ageInLunarYears >= MENOPAUSE_LUNAR_AGE;
-        }
-
-
         // Core Logic
         async function initializeApp() {
             setLanguage(currentLang); // Set initial language
@@ -955,74 +662,29 @@
 
             if (savedProfile) {
                 userProfile = { ...userProfile, ...savedProfile }; // Merge saved profile with default to handle new fields
-                // Ensure default values for new fields if not present in savedProfile from older versions
+                // Ensure default values for new fields if not present in savedProfile
                 userProfile.isPregnant = userProfile.isPregnant === undefined ? false : userProfile.isPregnant;
                 userProfile.ageInLunarYears = userProfile.ageInLunarYears === undefined ? 0 : userProfile.ageInLunarYears;
                 userProfile.lastNifasEnd = userProfile.lastNifasEnd === undefined ? null : userProfile.lastNifasEnd;
                 userProfile.currentNifasStart = userProfile.currentNifasStart === undefined ? null : userProfile.currentNifasStart;
-                userProfile.firstTimeSetupComplete = userProfile.firstTimeSetupComplete === undefined ? false : userProfile.firstTimeSetupComplete;
 
-                if (!userProfile.firstTimeSetupComplete) {
-                    // If setup is incomplete, restart the flow
-                    initialStatusModal.classList.add('open');
-                } else {
-                    updateDashboardUI();
-                }
-
+                updateDashboardUI();
             } else {
-                // First ever run, add sample data and start setup
-                //await addSampleData(); // Add sample data
-                // Re-fetch profile to include sample data
-                const freshProfile = await getProfile();
+                // Add sample data on first run if no profile exists
+                //await addSampleData();
+                const freshProfile = await getProfile(); // Re-fetch after adding samples
                 if (freshProfile) {
                     userProfile = { ...userProfile, ...freshProfile };
+                    updateDashboardUI();
+                } else {
+                    welcomeModal.classList.add('open');
                 }
-                // Start initial setup
-                initialStatusModal.classList.add('open');
             }
             mainActionButton.disabled = false; // Enable button after initialization attempt
         }
 
-        async function completeInitialSetup(status) {
-            userProfile.currentState = status;
-            initialStatusModal.classList.remove('open');
-            // Then proceed to check for age and habit
-            if (userProfile.ageInLunarYears === 0) {
-                ageModal.classList.add('open');
-            } else if (!userProfile.userType) { // No user type implies no habit set
-                welcomeModal.classList.add('open');
-            } else {
-                userProfile.firstTimeSetupComplete = true;
-                await saveProfile(userProfile);
-                updateDashboardUI();
-            }
-        }
-
-        async function saveAge() {
-            const age = parseInt(ageInput.value);
-            if (isNaN(age) || age < 9) { // Minimum Fiqhi age for puberty
-                alert(translations[currentLang].alertAgeInvalid);
-                return;
-            }
-            userProfile.ageInLunarYears = age;
-            await saveProfile(userProfile);
-            ageModal.classList.remove('open');
-
-            // Continue setup flow
-            if (!userProfile.userType) {
-                welcomeModal.classList.add('open');
-            } else {
-                userProfile.firstTimeSetupComplete = true;
-                await saveProfile(userProfile);
-                updateDashboardUI();
-            }
-        }
-
-
         async function setupMubtadiah() {
             userProfile.userType = 'mubtadiah';
-            // Mubtadiah's initial habit is not set yet, it's established by her first Haidh.
-            userProfile.firstTimeSetupComplete = true;
             await saveProfile(userProfile);
             welcomeModal.classList.remove('open');
             updateDashboardUI();
@@ -1049,7 +711,6 @@
             userProfile.userType = 'mutadah';
             userProfile.haidhAdahHours = daysToHours(haidhDays);
             userProfile.tuhrAdahHours = daysToHours(tuhrDays);
-            userProfile.firstTimeSetupComplete = true;
             await saveProfile(userProfile);
             mutadahHabitModal.classList.remove('open');
             updateDashboardUI();
@@ -1066,11 +727,6 @@
 
             datePicker.valueAsDate = new Date();
             timePicker.value = new Date().toTimeString().slice(0, 5);
-            spottingType.value = 'red'; // Default spotting type
-            eventNotes.value = ''; // Clear notes
-            spottingTypeContainer.classList.remove('hidden'); // Show spotting type for start
-            notesContainer.classList.remove('hidden'); // Show notes for start
-
             dateTimeModal.dataset.action = 'start';
             dateTimeModal.classList.add('open');
         }
@@ -1084,11 +740,6 @@
             }
             datePicker.valueAsDate = new Date();
             timePicker.value = new Date().toTimeString().slice(0, 5);
-            spottingType.value = 'red'; // Default spotting type
-            eventNotes.value = ''; // Clear notes
-            spottingTypeContainer.classList.add('hidden'); // Hide spotting type for end
-            notesContainer.classList.remove('hidden'); // Show notes for end
-
             dateTimeModal.dataset.action = 'end';
             dateTimeModal.classList.add('open');
         }
@@ -1096,8 +747,6 @@
         async function handleDateTimeSave() {
             const selectedDate = datePicker.value;
             const selectedTime = timePicker.value;
-            const selectedSpottingType = spottingType.value;
-            const notes = eventNotes.value.trim();
 
             if (!selectedDate || !selectedTime) {
                 alert(translations[currentLang].alertSelectDateTime);
@@ -1108,33 +757,19 @@
 
             if (dateTimeModal.dataset.action === 'start') {
                 if (currentMode === 'haidh') {
-                    // Fiqh: Tuhr Fasid (Invalid Purity) Calculation
-                    // If purity since last Haidh (or Nifas end if applicable) is less than TUHR_MIN (15 days),
-                    // the current bleeding is considered a continuation or "joined" with the previous flow.
-                    // This is a complex area in Fiqh. For simplification here, we combine the start time.
-                    // A truly rigorous app would re-evaluate the entire combined period.
+                    // Check for Tuhr Fasid (purity less than 15 days) and combine flows
                     const lastCycle = userProfile.cycleHistory[0];
-                    let lastValidEnd = userProfile.lastHaidhEnd;
-                    if (userProfile.lastNifasEnd && (!lastValidEnd || userProfile.lastNifasEnd > lastValidEnd)) {
-                        lastValidEnd = userProfile.lastNifasEnd; // Consider Nifas end if it's the most recent relevant purity end
-                    }
-
-                    if (lastCycle && (lastCycle.type === 'haidh' || lastCycle.type === 'nifas') && lastValidEnd && calculateDurationInHours(lastValidEnd, timestamp) < TUHR_MIN) {
-                        // This bleeding is part of a combined flow. We will use the start date of the *previous* relevant flow.
+                    if (lastCycle && lastCycle.type === 'haidh' && userProfile.lastHaidhEnd && calculateDurationInHours(userProfile.lastHaidhEnd, timestamp) < TUHR_MIN) {
+                        // This indicates a possible Tuhr Fasid, combine with the previous bleeding
+                        // This is a simplification: in true fiqh, the entire period from previous haidh start to current bleeding end would be recalculated.
+                        // For a single-file app, we mark this as a combined flow and let the user re-evaluate if it's too complex.
                         userProfile.currentBleedingStart = lastCycle.startDate; // Effectively combine
                         userProfile.currentState = 'bleeding';
-                        userProfile.currentBleedingSpottingType = selectedSpottingType;
-                        userProfile.currentBleedingNotes = notes;
                         await saveProfile(userProfile);
                         alert(translations[currentLang].alertBleedingStartLogged + "\n" + translations[currentLang].noteCombinedFlow);
-                    } else if (userProfile.lastHaidhEnd && timestamp < userProfile.lastHaidhEnd) {
-                        alert(translations[currentLang].alertBleedingBeforeLastHaidhEnd);
-                        return;
                     } else {
                         userProfile.currentBleedingStart = timestamp;
                         userProfile.currentState = 'bleeding';
-                        userProfile.currentBleedingSpottingType = selectedSpottingType;
-                        userProfile.currentBleedingNotes = notes;
                         await saveProfile(userProfile);
                         alert(translations[currentLang].alertBleedingStartLogged);
                     }
@@ -1145,8 +780,6 @@
                     }
                     userProfile.currentNifasStart = timestamp;
                     userProfile.currentState = 'nifas_bleeding';
-                    userProfile.currentNifasSpottingType = selectedSpottingType;
-                    userProfile.currentNifasNotes = notes;
                     await saveProfile(userProfile);
                     alert(translations[currentLang].alertNifasStartLogged);
                 }
@@ -1161,7 +794,7 @@
                         return;
                     }
 
-                    await calculateHaidhCycle(timestamp, userProfile.currentBleedingSpottingType, userProfile.currentBleedingNotes, notes);
+                    await calculateHaidhCycle(timestamp);
                     alert(translations[currentLang].alertCycleCalculated);
                 } else { // Nifas mode
                     if (!userProfile.currentNifasStart) {
@@ -1172,7 +805,7 @@
                         alert(translations[currentLang].alertNifasEndBeforeStart);
                         return;
                     }
-                    await calculateNifasCycle(timestamp, userProfile.currentNifasSpottingType, userProfile.currentNifasNotes, notes);
+                    await calculateNifasCycle(timestamp);
                     alert(translations[currentLang].alertNifasCalculated);
                 }
             }
@@ -1181,106 +814,62 @@
             updateDashboardUI();
         }
 
-        async function calculateHaidhCycle(bleedingEndTimestamp, startSpottingType, startNotes, endNotes) {
+        async function calculateHaidhCycle(bleedingEndTimestamp) {
             const bleedingStart = userProfile.currentBleedingStart;
             const totalBleedingDuration = calculateDurationInHours(bleedingStart, bleedingEndTimestamp);
             let cycleType = 'istihadah';
             let effectiveHaidhHours = 0;
-            let istihadahHours = 0;
-            // Purity before current bleeding: Calculate from the end of the last Haidh or Nifas, whichever is later.
-            let lastRelevantEnd = userProfile.lastHaidhEnd;
-            if (userProfile.lastNifasEnd && (!lastRelevantEnd || userProfile.lastNifasEnd > lastRelevantEnd)) {
-                lastRelevantEnd = userProfile.lastNifasEnd;
-            }
-            let tuhrDurationSinceLastRelevantEnd = lastRelevantEnd ? calculateDurationInHours(lastRelevantEnd, bleedingStart) : 0;
-
-            let isCombinedFlow = false;
-            // Check for Tuhr Fasid (purity less than 15 days, implying a continuation of a previous flow)
-            if (lastRelevantEnd && tuhrDurationSinceLastRelevantEnd < TUHR_MIN) {
-                isCombinedFlow = true;
-            }
+            let tuhrDurationSinceLastHaidh = userProfile.lastHaidhEnd ? calculateDurationInHours(userProfile.lastHaidhEnd, bleedingStart) : 0;
 
             // Fiqh Rule 1: Bleeding less than 3 days (HAIDH_MIN) is Istihadah
             if (totalBleedingDuration < HAIDH_MIN) {
                 cycleType = 'istihadah';
-                istihadahHours = totalBleedingDuration;
             }
             // Fiqh Rule 2: Bleeding starts before minimum purity (TUHR_MIN)
-            // This is complex. If it's tuhr fasid, it's generally istihadah unless a specific habit or mubtadiah rule applies.
-            // For this app, if isCombinedFlow is true, we categorize it carefully.
-            else if (isCombinedFlow) {
-                cycleType = 'istihadah'; // Simplified: If purity is broken too soon, assume istihadah
-                istihadahHours = totalBleedingDuration;
+            else if (tuhrDurationSinceLastHaidh < TUHR_MIN && userProfile.lastHaidhEnd !== null) {
+                // This scenario means previous haidh and current bleeding are separated by less than 15 days purity
+                // Hanafi Fiqh: combine with previous flow. For simplicity here, we mark this as istihadah if it's not a clear haidh after proper tuhr.
+                // A more advanced app would merge the cycles and recalculate.
+                // For this single-file app, if it's less than min tuhr, it's istihadah unless it's a mubtadiah's first haidh.
+                cycleType = 'istihadah';
             }
             // Fiqh Rule 3: Bleeding between 3 and 10 days (HAIDH_MIN to HAIDH_MAX)
             else if (totalBleedingDuration >= HAIDH_MIN && totalBleedingDuration <= HAIDH_MAX) {
                 cycleType = 'haidh';
                 effectiveHaidhHours = totalBleedingDuration;
-                userProfile.lastHaidhEnd = bleedingEndTimestamp; // Update last valid Haidh end
+                userProfile.lastHaidhEnd = bleedingEndTimestamp;
 
-                // Update Haidh Adah and Tuhr Adah based on this valid Haidh
-                userProfile.haidhAdahHours = effectiveHaidhHours;
-                userProfile.tuhrAdahHours = tuhrDurationSinceLastRelevantEnd;
-
+                // Update Haidh Adah if user is mutadah or mubtadiah establishes first habit
+                if (userProfile.userType === 'mutadah' || (userProfile.userType === 'mubtadiah' && userProfile.haidhAdahHours === 0)) {
+                    userProfile.haidhAdahHours = effectiveHaidhHours;
+                    // Update Tuhr Adah from the purity period leading up to this Haidh
+                    if (tuhrDurationSinceLastHaidh >= TUHR_MIN || (userProfile.userType === 'mubtadiah' && userProfile.tuhrAdahHours === 0)) {
+                        userProfile.tuhrAdahHours = tuhrDurationSinceLastHaidh === 0 ? TUHR_MIN : tuhrDurationSinceLastHaidh; // Default to 15 days for first if no prior
+                    }
+                }
             }
             // Fiqh Rule 4: Bleeding exceeds 10 days (HAIDH_MAX)
             else if (totalBleedingDuration > HAIDH_MAX) {
                 if (userProfile.userType === 'mubtadiah' && userProfile.haidhAdahHours === 0) {
                     // Mubtadiah's first bleeding, exceeding 10 days: First 10 days are Haidh, rest Istihadah.
                     effectiveHaidhHours = HAIDH_MAX;
-                    istihadahHours = totalBleedingDuration - HAIDH_MAX;
                     cycleType = 'haidh'; // The first 10 days are haidh
-                    userProfile.lastHaidhEnd = bleedingStart + (effectiveHaidhHours * 60 * 60 * 1000); // Haidh effectively ends here
-                    userProfile.haidhAdahHours = effectiveHaidhHours; // Establishes her first Haidh habit
-                    userProfile.tuhrAdahHours = TUHR_MIN; // Establishes her first Tuhr habit as minimal
+                    userProfile.lastHaidhEnd = bleedingStart + (effectiveHaidhHours * 60 * 60 * 1000);
+                    userProfile.haidhAdahHours = effectiveHaidhHours; // Establishes her first habit
+                    userProfile.tuhrAdahHours = TUHR_MIN; // Establishes her first tuhr habit as minimal
                 } else if (userProfile.userType === 'mutadah' && userProfile.haidhAdahHours > 0) {
                     // Mutadah with an established habit: Haidh is up to her habit, rest is Istihadah
-                    // Fiqh: Apply existing habit. If bleeding is longer than habit but within 10 days, habit extends to actual bleeding.
-                    // If bleeding is longer than 10 days, her habit is Haidh, rest is Istihadah.
                     effectiveHaidhHours = userProfile.haidhAdahHours;
-                    istihadahHours = totalBleedingDuration - effectiveHaidhHours;
                     cycleType = 'haidh'; // The initial part is haidh
-                    userProfile.lastHaidhEnd = bleedingStart + (effectiveHaidhHours * 60 * 60 * 1000); // Haidh effectively ends here
-                    // Adah for Haidh doesn't change here if it was based on an earlier longer one.
-                    // Adah for Tuhr is updated if this tuhr was valid.
-                    if (tuhrDurationSinceLastRelevantEnd >= TUHR_MIN) {
-                        userProfile.tuhrAdahHours = tuhrDurationSinceLastRelevantEnd;
-                    }
+                    userProfile.lastHaidhEnd = bleedingStart + (effectiveHaidhHours * 60 * 60 * 1000);
                 } else {
-                    // This scenario covers a mutadah who exceeds 10 days without a clear established habit or complex scenarios.
-                    // For simplified approach: consider all as istihadah. A mufti would be consulted for specific cases.
+                    // This scenario means an established mutadah with changing habits, or other complex cases.
+                    // For this simplified app, if no clear habit or it's not the first haidh exceeding 10,
+                    // it defaults to istihadah in its entirety. A mufti would be consulted here.
                     cycleType = 'istihadah';
-                    istihadahHours = totalBleedingDuration;
                     effectiveHaidhHours = 0;
                 }
             }
-
-            // After Menopause, any bleeding beyond HAIDH_MAX (10 days) or her habit is considered Istihadah.
-            // If it's a mubtadiah after menopause, her first 10 days are still haidh.
-            // This is a simplification. The rulings for Kudrah/Sufrah after menopause also change.
-            if (isMenopausalAge() && totalBleedingDuration > HAIDH_MAX) {
-                if (userProfile.userType === 'mubtadiah' && userProfile.haidhAdahHours === 0) {
-                    effectiveHaidhHours = HAIDH_MAX;
-                    istihadahHours = totalBleedingDuration - HAIDH_MAX;
-                    cycleType = 'haidh';
-                    userProfile.lastHaidhEnd = bleedingStart + (effectiveHaidhHours * 60 * 60 * 1000);
-                    userProfile.haidhAdahHours = effectiveHaidhHours;
-                    userProfile.tuhrAdahHours = TUHR_MIN;
-                } else if (userProfile.userType === 'mutadah' && userProfile.haidhAdahHours > 0) {
-                    effectiveHaidhHours = userProfile.haidhAdahHours;
-                    istihadahHours = totalBleedingDuration - effectiveHaidhHours;
-                    cycleType = 'haidh';
-                    userProfile.lastHaidhEnd = bleedingStart + (effectiveHaidhHours * 60 * 60 * 1000);
-                    if (tuhrDurationSinceLastRelevantEnd >= TUHR_MIN) {
-                        userProfile.tuhrAdahHours = tuhrDurationSinceLastRelevantEnd;
-                    }
-                } else {
-                    cycleType = 'istihadah';
-                    istihadahHours = totalBleedingDuration;
-                    effectiveHaidhHours = 0;
-                }
-            }
-
 
             userProfile.cycleHistory.unshift({ // Add to the beginning of the array
                 startDate: bleedingStart,
@@ -1288,29 +877,20 @@
                 durationHours: totalBleedingDuration,
                 type: cycleType,
                 effectiveHaidhHours: effectiveHaidhHours,
-                istihadahHours: istihadahHours, // Store istihadah hours explicitly
-                tuhrDurationBefore: tuhrDurationSinceLastRelevantEnd,
-                isCombinedFlow: isCombinedFlow,
-                startSpotting: startSpottingType,
-                endSpotting: spottingType.value, // Get from current modal selection
-                startNotes: startNotes,
-                endNotes: endNotes
+                tuhrDurationBefore: tuhrDurationSinceLastHaidh,
+                isCombinedFlow: (tuhrDurationSinceLastHaidh < TUHR_MIN && userProfile.lastHaidhEnd !== null && cycleType === 'istihadah') // Indicate if it was considered combined
             });
 
             // Update currentState and reset currentBleedingStart
             userProfile.currentState = 'tuhr';
             userProfile.currentBleedingStart = null;
-            userProfile.currentBleedingSpottingType = null;
-            userProfile.currentBleedingNotes = null;
-
             await saveProfile(userProfile);
         }
 
-        async function calculateNifasCycle(nifasEndTimestamp, startSpottingType, startNotes, endNotes) {
+        async function calculateNifasCycle(nifasEndTimestamp) {
             const nifasStart = userProfile.currentNifasStart;
             const totalNifasDuration = calculateDurationInHours(nifasStart, nifasEndTimestamp);
             let effectiveNifasHours = 0;
-            let istihadahHours = 0; // Bleeding after Nifas max is Istihadah
             let cycleType = 'nifas';
 
             if (totalNifasDuration <= NIFAS_MAX) {
@@ -1319,7 +899,6 @@
             } else {
                 // Exceeds 40 days: Nifas is 40 days, rest is Istihadah
                 effectiveNifasHours = NIFAS_MAX;
-                istihadahHours = totalNifasDuration - NIFAS_MAX;
                 userProfile.lastNifasEnd = nifasStart + (NIFAS_MAX * 60 * 60 * 1000);
             }
 
@@ -1329,19 +908,11 @@
                 durationHours: totalNifasDuration,
                 type: 'nifas',
                 effectiveNifasHours: effectiveNifasHours,
-                istihadahHours: istihadahHours,
-                tuhrDurationBefore: 0, // Not applicable for Nifas calculation
-                isCombinedFlow: false, // Nifas doesn't typically combine with previous haidh for tuhr fasid
-                startSpotting: startSpottingType,
-                endSpotting: spottingType.value,
-                startNotes: startNotes,
-                endNotes: endNotes
+                // Nifas doesn't have "purity before" in the same way haidh does for cycle calculation
             });
 
             userProfile.currentState = 'tuhr'; // After Nifas, it's Tuhr
             userProfile.currentNifasStart = null;
-            userProfile.currentNifasSpottingType = null;
-            userProfile.currentNifasNotes = null;
             await saveProfile(userProfile);
         }
 
@@ -1354,19 +925,16 @@
 
             logNifasBtn.classList.add('hidden'); // Hide Nifas button by default
 
-            if (!userProfile.firstTimeSetupComplete) {
-                statusMessage = translations[currentLang].loadingStatus; // Should be handled by modal display
-                mainActionButton.textContent = translations[currentLang].startSetup;
-                mainActionButton.onclick = () => initialStatusModal.classList.add('open');
-                mainActionButton.disabled = false;
-                return;
-            }
-
             if (userProfile.isPregnant) {
                 statusMessage = translations[currentLang].currentStatusPregnant;
                 statusClass = "bg-blue-50 text-blue-800 border-r-4 border-blue-500";
                 mainActionButton.textContent = "حمل لاگ کریں (جلد آرہا ہے)"; // Placeholder
                 mainActionButton.disabled = true;
+            } else if (!userProfile.userType) {
+                statusMessage = translations[currentLang].loadingStatus; // Should be replaced by setup process
+                buttonText = translations[currentLang].startSetup;
+                mainActionButton.onclick = () => welcomeModal.classList.add('open');
+                mainActionButton.disabled = false;
             } else {
                 switch (userProfile.currentState) {
                     case 'tuhr':
@@ -1455,15 +1023,13 @@
                 let durationDetails = '';
                 let purityBeforeText = cycle.tuhrDurationBefore !== undefined ? `<p><strong>${translations[currentLang].purityBefore(hoursToDays(cycle.tuhrDurationBefore))}</strong></p>` : '';
                 let noteText = cycle.isCombinedFlow ? `<p class="text-red-700"><strong>${translations[currentLang].noteCombinedFlow}</strong></p>` : '';
-                let spottingInfo = (cycle.startSpotting || cycle.endSpotting) ? `<p class="text-sm text-gray-700">خون کی قسم: ${cycle.startSpotting || 'N/A'} (آغاز)، ${cycle.endSpotting || 'N/A'} (اختتام)</p>` : '';
-                let notesInfo = (cycle.startNotes || cycle.endNotes) ? `<p class="text-sm text-gray-700">نوٹس: ${cycle.startNotes || ''} ${cycle.endNotes || ''}</p>` : '';
 
                 switch (cycle.type) {
                     case 'haidh':
                         cardClass = 'bg-red-50 border-r-4 border-red-500';
                         typeText = translations[currentLang].haidhCycleType;
                         let haidhDays = hoursToDays(cycle.effectiveHaidhHours);
-                        let istihadahDaysHaidh = hoursToDays(cycle.istihadahHours);
+                        let istihadahDaysHaidh = hoursToDays(cycle.durationHours - cycle.effectiveHaidhHours);
                         durationDetails = translations[currentLang].effectiveHaidh(haidhDays, istihadahDaysHaidh);
                         break;
                     case 'istihadah':
@@ -1475,7 +1041,7 @@
                         cardClass = 'bg-purple-50 border-r-4 border-purple-500';
                         typeText = translations[currentLang].nifasCycleType;
                         let nifasDays = hoursToDays(cycle.effectiveNifasHours);
-                        let istihadahDaysNifas = hoursToDays(cycle.istihadahHours);
+                        let istihadahDaysNifas = hoursToDays(cycle.durationHours - cycle.effectiveNifasHours);
                         durationDetails = translations[currentLang].effectiveNifas(nifasDays, istihadahDaysNifas);
                         purityBeforeText = ''; // Not applicable for Nifas
                         break;
@@ -1488,153 +1054,35 @@
                     <p><strong>${translations[currentLang].cycleEnd}</strong> ${formatDateTime(cycle.endDate)}</p>
                     <p>${durationDetails}</p>
                     ${purityBeforeText}
-                    ${spottingInfo}
-                    ${notesInfo}
                     ${noteText}
                 `;
                 historyList.appendChild(cycleDiv);
             });
         }
 
-        // Calendar Functions
-        function renderCalendar(date) {
-            currentCalendarDate = new Date(date.getFullYear(), date.getMonth(), 1); // Ensure it's start of the month
-            currentMonthYear.textContent = `${translations[currentLang].monthNames[currentCalendarDate.getMonth()]} ${currentCalendarDate.getFullYear()}`;
-            calendarEl.innerHTML = '';
-
-            // Day headers
-            translations[currentLang].dayNames.forEach(day => {
-                const dayHeader = document.createElement('div');
-                dayHeader.className = 'day-header';
-                dayHeader.textContent = day;
-                calendarEl.appendChild(dayHeader);
-            });
-
-            const firstDayOfMonth = currentCalendarDate.getDay(); // 0 for Sunday, 1 for Monday...
-            const daysInMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
-
-            // Fill leading empty days
-            for (let i = 0; i < firstDayOfMonth; i++) {
-                const emptyCell = document.createElement('div');
-                emptyCell.className = 'day-cell inactive';
-                calendarEl.appendChild(emptyCell);
-            }
-
-            // Fill days of the month
-            for (let i = 1; i <= daysInMonth; i++) {
-                const dayCell = document.createElement('div');
-                dayCell.className = 'day-cell';
-                const currentDay = new Date(date.getFullYear(), date.getMonth(), i);
-                currentDay.setHours(0, 0, 0, 0);
-
-                const dayNumber = document.createElement('span');
-                dayNumber.className = 'day-number';
-                dayNumber.textContent = i;
-                dayCell.appendChild(dayNumber);
-
-                if (currentDay.getTime() === today.getTime()) {
-                    dayCell.classList.add('today');
-                }
-
-                // Mark cycle events
-                userProfile.cycleHistory.forEach(cycle => {
-                    const cycleStartDate = new Date(cycle.startDate);
-                    cycleStartDate.setHours(0, 0, 0, 0);
-                    const cycleEndDate = new Date(cycle.endDate);
-                    cycleEndDate.setHours(0, 0, 0, 0);
-
-                    // For Haidh/Nifas with Istihadah portion, mark effective Haidh/Nifas days
-                    if (cycle.type === 'haidh' && cycle.effectiveHaidhHours > 0) {
-                        const effectiveHaidhEnd = new Date(cycle.startDate + (cycle.effectiveHaidhHours * 60 * 60 * 1000));
-                        effectiveHaidhEnd.setHours(0, 0, 0, 0);
-                        if (currentDay >= cycleStartDate && currentDay <= effectiveHaidhEnd) {
-                            const marker = document.createElement('div');
-                            marker.className = 'cycle-marker haidh';
-                            marker.title = translations[currentLang].haidhCycleType;
-                            dayCell.appendChild(marker);
-                        } else if (cycle.istihadahHours > 0 && currentDay > effectiveHaidhEnd && currentDay <= cycleEndDate) {
-                            const marker = document.createElement('div');
-                            marker.className = 'cycle-marker istihadah';
-                            marker.title = translations[currentLang].istihadahCycleType;
-                            dayCell.appendChild(marker);
-                        }
-                    } else if (cycle.type === 'nifas' && cycle.effectiveNifasHours > 0) {
-                        const effectiveNifasEnd = new Date(cycle.startDate + (cycle.effectiveNifasHours * 60 * 60 * 1000));
-                        effectiveNifasEnd.setHours(0, 0, 0, 0);
-                        if (currentDay >= cycleStartDate && currentDay <= effectiveNifasEnd) {
-                            const marker = document.createElement('div');
-                            marker.className = 'cycle-marker nifas';
-                            marker.title = translations[currentLang].nifasCycleType;
-                            dayCell.appendChild(marker);
-                        } else if (cycle.istihadahHours > 0 && currentDay > effectiveNifasEnd && currentDay <= cycleEndDate) {
-                            const marker = document.createElement('div');
-                            marker.className = 'cycle-marker istihadah';
-                            marker.title = translations[currentLang].istihadahCycleType;
-                            dayCell.appendChild(marker);
-                        }
-                    } else if (currentDay >= cycleStartDate && currentDay <= cycleEndDate) {
-                        const marker = document.createElement('div');
-                        marker.className = `cycle-marker ${cycle.type}`;
-                        marker.title = cycle.type === 'istihadah' ? translations[currentLang].istihadahCycleType : (cycle.type === 'haidh' ? translations[currentLang].haidhCycleType : translations[currentLang].nifasCycleType);
-                        dayCell.appendChild(marker);
-                    }
-                });
-                calendarEl.appendChild(dayCell);
-            }
-        }
-
         function showHistoryPage() {
             document.getElementById('dashboard').classList.add('hidden');
-            calendarSection.classList.add('hidden'); // Hide calendar if visible
             cycleHistorySection.classList.remove('hidden');
             renderCycleHistory();
-        }
-
-        function showCalendarPage() {
-            document.getElementById('dashboard').classList.add('hidden');
-            cycleHistorySection.classList.add('hidden'); // Hide history if visible
-            calendarSection.classList.remove('hidden');
-            renderCalendar(currentCalendarDate);
         }
 
         function showDashboardPage() {
             document.getElementById('dashboard').classList.remove('hidden');
             cycleHistorySection.classList.add('hidden');
-            calendarSection.classList.add('hidden');
-            updateDashboardUI(); // Refresh dashboard in case history or calendar was viewed
+            updateDashboardUI(); // Refresh dashboard in case history was viewed
         }
 
         // Event Listeners
         langToggleBtn.addEventListener('click', () => {
             setLanguage(currentLang === 'ur' ? 'en' : 'ur');
         });
-
-        statusTuhrBtn.addEventListener('click', () => completeInitialSetup('tuhr'));
-        statusBleedingBtn.addEventListener('click', () => completeInitialSetup('bleeding'));
-        saveAgeBtn.addEventListener('click', saveAge);
-
         mubtadiahBtn.addEventListener('click', setupMubtadiah);
         mutadahBtn.addEventListener('click', setupMutadah);
         saveMutadahHabitBtn.addEventListener('click', saveMutadahHabit);
         saveDateTimeBtn.addEventListener('click', handleDateTimeSave);
         cancelDateTimeBtn.addEventListener('click', () => dateTimeModal.classList.remove('open'));
-
         historyBtn.addEventListener('click', showHistoryPage);
         backToDashboardBtn.addEventListener('click', showDashboardPage);
-
-        calendarBtn.addEventListener('click', showCalendarPage);
-        prevMonthBtn.addEventListener('click', () => {
-            currentCalendarDate.setMonth(currentCalendarDate.getMonth() - 1);
-            renderCalendar(currentCalendarDate);
-        });
-        nextMonthBtn.addEventListener('click', () => {
-            currentCalendarDate.setMonth(currentCalendarDate.getMonth() + 1);
-            renderCalendar(currentCalendarDate);
-        });
-        backToDashboardFromCalendarBtn.addEventListener('click', showDashboardPage);
-
 
         // Data Backup & Restore
         async function exportData() {
@@ -1718,15 +1166,14 @@
                 currentNifasStart: null,
                 cycleHistory: [],
                 isPregnant: false,
-                ageInLunarYears: 30, // Sample age
-                firstTimeSetupComplete: true, // Mark as complete for sample data
+                ageInLunarYears: 0,
             };
 
             const now = Date.now();
             const oneDay = 1000 * 60 * 60 * 24;
 
             // Sample 1: Normal Haidh (7 days) after a long Tuhr (25 days)
-            let haidh1End = now - (oneDay * 80); // Ended 80 days ago
+            let haidh1End = now - (oneDay * 30); // Ended 30 days ago
             let haidh1Start = haidh1End - (oneDay * 7); // Lasted 7 days
             userProfile.cycleHistory.unshift({
                 startDate: haidh1Start,
@@ -1734,20 +1181,15 @@
                 durationHours: daysToHours(7),
                 type: 'haidh',
                 effectiveHaidhHours: daysToHours(7),
-                istihadahHours: 0,
                 tuhrDurationBefore: daysToHours(25), // Assumed purity before this cycle
-                isCombinedFlow: false,
-                startSpotting: 'red',
-                endSpotting: 'yellow',
-                startNotes: 'First Haidh after a long break.',
-                endNotes: 'Ended with yellow discharge.'
+                isCombinedFlow: false
             });
             userProfile.lastHaidhEnd = haidh1End;
             userProfile.haidhAdahHours = daysToHours(7);
             userProfile.tuhrAdahHours = daysToHours(25); // Update tuhr adah from this valid purity
 
-            // Sample 2: Istihadah (too short, 2 days) after valid Tuhr (20 days)
-            let istihadah2Start = userProfile.lastHaidhEnd + (oneDay * 20);
+            // Sample 2: Istihadah (too short, 2 days) after valid Tuhr (15 days)
+            let istihadah2Start = userProfile.lastHaidhEnd + (oneDay * 15);
             let istihadah2End = istihadah2Start + (oneDay * 2);
             userProfile.cycleHistory.unshift({
                 startDate: istihadah2Start,
@@ -1755,19 +1197,14 @@
                 durationHours: daysToHours(2),
                 type: 'istihadah',
                 effectiveHaidhHours: 0,
-                istihadahHours: daysToHours(2),
-                tuhrDurationBefore: daysToHours(20),
-                isCombinedFlow: false,
-                startSpotting: 'brown',
-                endSpotting: 'brown',
-                startNotes: 'Short spotting.',
-                endNotes: ''
+                tuhrDurationBefore: daysToHours(15),
+                isCombinedFlow: false
             });
             // lastHaidhEnd remains unchanged as this was Istihadah
 
             // Sample 3: Haidh exceeding 10 days (12 days) for a Mutadah with 7-day habit.
             // First 7 days are Haidh, remaining 5 days are Istihadah.
-            let bleeding3Start = userProfile.lastHaidhEnd + (oneDay * 28); // 28 days purity after last haidh
+            let bleeding3Start = userProfile.lastHaidhEnd + (oneDay * 20); // 20 days purity after last haidh
             let bleeding3End = bleeding3Start + (oneDay * 12); // Bleeds for 12 days
             userProfile.cycleHistory.unshift({
                 startDate: bleeding3Start,
@@ -1775,19 +1212,14 @@
                 durationHours: daysToHours(12),
                 type: 'haidh', // Primary type is haidh, but effective haidh is limited
                 effectiveHaidhHours: daysToHours(7), // Limited by habit
-                istihadahHours: daysToHours(5),
-                tuhrDurationBefore: daysToHours(28),
-                isCombinedFlow: false,
-                startSpotting: 'dark-red',
-                endSpotting: 'red',
-                startNotes: 'Heavy bleeding started.',
-                endNotes: 'Bleeding continued past habit.'
+                tuhrDurationBefore: daysToHours(20),
+                isCombinedFlow: false
             });
             userProfile.lastHaidhEnd = bleeding3Start + daysToHours(7); // Haidh effectively ends at habit mark
-            userProfile.tuhrAdahHours = daysToHours(28); // Update tuhr adah from this purity (valid)
+            userProfile.tuhrAdahHours = daysToHours(20); // Update tuhr adah from this purity
 
-            // Sample 4: Nifas (30 days) - This occurred earlier.
-            let nifasStart = now - (oneDay * 150); // Nifas started 150 days ago
+            // Sample 4: Nifas (30 days)
+            let nifasStart = now - (oneDay * 60); // Nifas started 60 days ago
             let nifasEnd = nifasStart + (oneDay * 30); // Lasted 30 days
             userProfile.cycleHistory.unshift({
                 startDate: nifasStart,
@@ -1795,13 +1227,8 @@
                 durationHours: daysToHours(30),
                 type: 'nifas',
                 effectiveNifasHours: daysToHours(30),
-                istihadahHours: 0,
                 tuhrDurationBefore: 0, // Not applicable for Nifas
-                isCombinedFlow: false,
-                startSpotting: 'red',
-                endSpotting: 'yellow',
-                startNotes: 'Post-childbirth bleeding.',
-                endNotes: 'Nifas ended as expected.'
+                isCombinedFlow: false
             });
             userProfile.lastNifasEnd = nifasEnd;
 
